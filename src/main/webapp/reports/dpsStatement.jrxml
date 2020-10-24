@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dpsStatement" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b45f2bdd-b368-4e80-8917-968f71906ada">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT e.name, e.empid ,e.salary_accounts, e.dps_accounts, s.year_months AS salary_month,sd.dps,sd.provident_fund, sd.dps+sd.provident_fund AS total_pf,sd.net_payable, ds.name AS designation   FROM salary_details sd
+LEFT JOIN salary_info s ON s.id =sd.salary_info_id
+LEFT JOIN employee e ON e.id = sd.employee_id
+LEFT JOIN hr_designation ds ON e.hr_designation_id = ds.id
+WHERE sd.payment_type='CHEQUE' AND s.id=7
+ORDER BY s.salary_date ASC, e.empid ASC]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salary_accounts" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dps_accounts" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salary_month" class="java.lang.String"/>
+	<field name="dps" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provident_fund" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_pf" class="java.lang.Double"/>
+	<field name="net_payable" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="designation" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{dps}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="2" width="100" height="20" uuid="69054a44-ceb2-4944-ab90-29a4bab87e9f"/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="2" width="100" height="20" uuid="444e0395-3a47-438e-b63a-c2a18d38c38e"/>
+				<text><![CDATA[dps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="2" width="100" height="20" uuid="72826a47-ba3b-44f5-acfb-fafae2680898"/>
+				<text><![CDATA[provident_fund]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20" uuid="18e2e99b-2e28-4779-991b-309d4c45dc8d"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="0" width="100" height="20" uuid="0ee4520d-979d-40bb-b0f0-def929c1377e"/>
+				<textFieldExpression><![CDATA[$F{dps}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="100" height="20" uuid="925916cd-6b77-439d-a61a-028fc00f1914"/>
+				<textFieldExpression><![CDATA[$F{provident_fund}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="237" y="0" width="100" height="20" uuid="d6012d6c-fc0e-4e9b-aefe-14adc9ffc19a"/>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="118" y="0" width="100" height="20" uuid="a83a4e04-b509-40eb-a57e-e6630a526175"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

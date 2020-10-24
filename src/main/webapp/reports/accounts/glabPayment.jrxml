@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="glabPayment" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="schoolAddress1" class="java.lang.String"/>
+	<parameter name="schoolAddress2" class="java.lang.String"/>
+	<parameter name="schoolAddress3" class="java.lang.String"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<parameter name="schoolName" class="java.lang.String"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT gp.account_no,
+ gp.due_date, gp.invoice_date, gp.invoice_no,
+gp.notes, gp.terms, gd.amount, gd.description,
+ gd.qty, gd.rate FROM glab_payment gp
+ inner join glab_details gd on gp.id = gd.payment_id
+where $P!{sqlParam}]]>
+	</queryString>
+	<field name="account_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="due_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoice_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoice_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="notes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="terms" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rate" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="170" splitType="Stretch">
+			<image vAlign="Bottom" onErrorType="Icon">
+				<reportElement x="10" y="10" width="200" height="40" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"company-logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="50" width="200" height="20" uuid="ef9dcc9a-52c9-4b8a-85cb-ff996b8ca52f"/>
+				<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="465" y="10" width="100" height="20" uuid="6b11f764-edf7-4c2d-8e25-f989ad322b3f"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="30" width="100" height="15" isPrintWhenDetailOverflows="true" uuid="0817b27f-9ea5-4ad5-a891-54077aed0d97"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{invoice_no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="465" y="60" width="100" height="15" uuid="88a52aea-b001-4e02-90df-b2d7a30e188a"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Balance Due]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="75" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="9406d6a1-b730-4495-8062-c5f6c6903fbb"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BDT "+$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="105" width="100" height="15" isPrintWhenDetailOverflows="true" uuid="716fb776-6ca6-4414-89ab-66d95927b777"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoice_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="125" width="100" height="15" isPrintWhenDetailOverflows="true" uuid="c74510b4-4c60-4431-9ae8-1594fb6c99ac"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{due_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="465" y="145" width="100" height="15" isPrintWhenDetailOverflows="true" uuid="3bd9515b-c6d7-4547-8d5b-22c273c1420d"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="95" width="100" height="25" uuid="c6ba4271-62bc-4baf-895e-ce5f56fae7bb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bill To ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="10" y="135" width="311" height="15" uuid="3e3eb580-14fc-41d9-9914-87a6d3ff0295"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress1}" ,"+$P{schoolAddress2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="10" y="120" width="200" height="15" uuid="256f26de-8ed0-4a97-88c4-5d278da6c6a5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="150" width="200" height="15" isPrintWhenDetailOverflows="true" uuid="6216f686-56d9-4cb7-a99d-ae13cd0fdd1a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="125" width="88" height="15" uuid="c73efdf8-64d6-44a9-9d99-877bb2551931"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Due Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="105" width="88" height="15" uuid="dc074ef8-24f1-4fe0-a6c4-776eeb0a48b3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Invoice Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="145" width="88" height="15" uuid="67355b57-55d6-4b57-bbe5-f9a5acbf2783"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Terms : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="555" height="15" uuid="ba4e2f7b-db62-49ab-b5e9-804eaa655ab9"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="15" uuid="a3090e61-2f1f-450d-9b68-cb600ed2756d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="464" y="0" width="88" height="15" uuid="3f87b89c-eb80-4de7-9e2d-e5a55bc62c25"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="311" y="0" width="81" height="15" uuid="af266e4c-c4e3-40e4-89ac-910e5c50d99c"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="281" height="15" uuid="f6fd82be-ee04-4716-89c8-70c221bbced4"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Item & Description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="392" y="0" width="72" height="15" uuid="4ee7303e-6dd8-41a8-81d5-1f307a8c0a8e"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Rate]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="0" width="30" height="15" uuid="1284912d-603c-46bd-9dc9-53fde7dde79f"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="40" y="0" width="281" height="15" uuid="81781377-506f-4fee-83ee-5fda6a668b1f"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="321" y="0" width="81" height="15" uuid="6027a04b-e5a1-4cd7-b466-cd0bb19b7efe"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="0" width="72" height="15" uuid="a486b3f3-a840-48cb-a32d-eb536e89cba4"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="474" y="0" width="91" height="15" uuid="5917e3f3-be82-46e2-ac5c-82da3f6508fe"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="150">
+			<staticText>
+				<reportElement x="402" y="5" width="72" height="15" uuid="6bfa0519-293b-49ed-a11e-c6d85bf4ee2a"/>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="475" y="25" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="a1a945c3-7655-4bc9-81f6-fd59d09d3665"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="403" y="25" width="72" height="15" uuid="bf8812f3-da24-4c30-81bb-4cf35d0ac473"/>
+				<text><![CDATA[Total : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="45" width="72" height="15" uuid="33775a4d-2c65-4bba-8ca4-4c7105da6653"/>
+				<text><![CDATA[Balance Due : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="476" y="45" width="90" height="15" uuid="7daaf692-6651-489e-a974-99a08f295688"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="45" width="100" height="20" uuid="c70ed2b2-f964-4272-bab0-7137343db22c"/>
+				<text><![CDATA[Notes]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="82" width="139" height="15" isPrintWhenDetailOverflows="true" uuid="01cb4b57-eafb-48c1-97fa-58dacaba70bd"/>
+				<textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="67" width="100" height="15" uuid="f75f0cb3-0fe0-40a5-8bab-42ed2a43ad77"/>
+				<text><![CDATA[Account Details:  ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="476" y="5" width="90" height="15" isPrintWhenDetailOverflows="true" uuid="14c50396-64bb-4caa-8e6d-ab8329ff0377"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

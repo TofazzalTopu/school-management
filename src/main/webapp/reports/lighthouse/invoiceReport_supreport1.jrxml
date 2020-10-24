@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoiceReport_supreport1" language="groovy" pageWidth="532" pageHeight="356" columnWidth="512" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="f8bf5149-c480-4d54-a542-b8117157765b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="invoiceId" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT inv.invoice_no invNo, inv.invoice_date invDate, inv.amount as invPayable, inv.discount invDiscount, inv.payment invPayment,
+std.studentid, std.name stdName, std.roll_no rollNo, cName.name clsName, section.name sName,fItems.code as feeCode,
+fItems.name as feeName, invDtl.description, invDtl.amount, invDtl.discount, invDtl.net_payment, invDtl.quantity, invDtl.total_payment as itemPayment
+FROM invoice inv
+inner join student std on inv.student_id = std.id
+inner join section section on std.section_id=section.id
+inner join class_name cName on std.class_name_id=cName.id
+inner join invoice_details invDtl  on inv.id = invDtl.invoice_id
+inner join fee_items fItems on invDtl.fee_items_id = fItems.id
+ where inv.id=$P{invoiceId}]]>
+	</queryString>
+	<field name="invNo" class="java.lang.String"/>
+	<field name="invDate" class="java.sql.Timestamp"/>
+	<field name="invPayable" class="java.lang.Double"/>
+	<field name="invDiscount" class="java.lang.Double"/>
+	<field name="invPayment" class="java.lang.Double"/>
+	<field name="studentid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stdName" class="java.lang.String"/>
+	<field name="rollNo" class="java.lang.Integer"/>
+	<field name="clsName" class="java.lang.String"/>
+	<field name="sName" class="java.lang.String"/>
+	<field name="feeCode" class="java.lang.String"/>
+	<field name="feeName" class="java.lang.String"/>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="net_payment" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="itemPayment" class="java.lang.Double"/>
+	<variable name="descriptionTxt" class="java.lang.String" resetType="Column">
+		<variableExpression><![CDATA[$F{description}?" ( "+$F{description}+" ) ":" "]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="129">
+			<textField>
+				<reportElement x="10" y="103" width="238" height="20" uuid="d316e15d-4ac3-4f5e-8313-062c1fe76f13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Name :"+$F{stdName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="80" width="185" height="20" uuid="6a9f98ff-9e04-4fad-be11-763e0599d9ea"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Roll No: "+$F{rollNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="83" width="161" height="20" uuid="3f547b59-d6f6-4aad-a9d5-69edacb2ffff"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Student ID: "+$F{studentid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="83" width="156" height="20" uuid="da47674e-b6a8-4163-814c-575cb2c85794"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Class: "+$F{clsName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="100" width="185" height="20" uuid="b9b2d541-8d7b-419d-9e72-435ddd4aa77d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Section: "+$F{sName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="0" width="202" height="40" uuid="2d837bfb-bc02-4d62-9321-3347250d75b4"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Money Receipt]]></text>
+			</staticText>
+			<textField pattern="&apos;Date: &apos;dd-MMM-yyyy">
+				<reportElement x="327" y="60" width="185" height="20" uuid="0d220443-5beb-44e1-835a-90db84376a32"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="60" width="161" height="20" uuid="1c195521-7647-47ce-942e-1fbf759f8bde"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Invoice No: "+ $F{invNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="125" width="512" height="2" uuid="b4c25963-8493-4efb-8ff1-e6b439522063"/>
+			</line>
+			<image onErrorType="Icon">
+				<reportElement x="10" y="0" width="160" height="40" uuid="e8d25e40-eace-49eb-8caf-97f02d7ac11a"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="41" y="0" width="35" height="20" uuid="f31f2b4e-4989-414c-8457-b9c4270a7a9e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="136" height="20" uuid="6f3138e2-4a6a-49b2-acff-ea045a4c73f2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fee Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="0" width="278" height="20" uuid="854278e0-c0ff-40ed-8dba-c8dc0f1b1f14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="41" y="0" width="35" height="15" uuid="d629a9eb-58e4-4da6-a2e8-85b3a381bb14"/>
+				<box topPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="354" y="0" width="136" height="15" isRemoveLineWhenBlank="true" uuid="b4677414-9a26-45e5-b21a-a8eaa4799573"/>
+				<box topPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itemPayment}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="76" y="0" width="278" height="15" isRemoveLineWhenBlank="true" uuid="50647ccf-0d94-4079-9938-d9183e7026b3"/>
+				<box topPadding="2" leftPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{feeName}+$V{descriptionTxt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="343" y="0" width="147" height="20" isRemoveLineWhenBlank="true" uuid="2dcbce89-8765-4e07-bd1b-f38d32a2482f"/>
+				<box topPadding="1" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total: "+$F{invPayment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="354" y="30" width="145" height="20" uuid="bf7087c7-cf46-4995-889d-6784b0c12e9a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="barcodePrint" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1fdf555d-f0d1-4e28-a5ed-ab5399195f61">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select book_details.name, author.name as authorName, book_publisher.name publisherName, book.book_id from book
+inner join book_details on book.book_details_id=book_details.id
+inner join book_category on book_details.category_id=book_category.id
+inner join author on book_details.author_id=author.id
+inner join book_publisher on book_details.book_publisher_id=book_publisher.id where $P!{sqlParam}]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="authorName" class="java.lang.String"/>
+	<field name="publisherName" class="java.lang.String"/>
+	<field name="book_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="4" width="275" height="15" uuid="a88d7f0c-b90b-43e7-bb7f-7c3d0613a156"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="275" y="4" width="280" height="45" uuid="aad324f9-cc90-42d2-8da8-abdf31e4ba63"/>
+				<jr:Code128 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{book_id}]]></jr:codeExpression>
+				</jr:Code128>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="19" width="275" height="15" uuid="a2552a87-e77b-4743-9fda-e6698a9e908f"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{authorName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="34" width="275" height="15" uuid="97fffb10-47f1-4d4d-baa2-397848a70d6c"/>
+				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{publisherName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="53" width="555" height="1" uuid="5de46455-60a9-4664-b8e9-3632a1a5244d"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

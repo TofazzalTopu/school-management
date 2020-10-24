@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="applicantsCountList" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="35cbf4e7-9ad0-4f5a-abb9-57e05559479f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="applicantStatus" class="java.lang.String"/>
+	<parameter name="admissionYear" class="java.lang.String"/>
+	<parameter name="sqlParams" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select cls.name, count(reg.id) as numOfApply
+from reg_online_registration reg
+INNER JOIN class_name cls on reg.class_name_id = cls.id
+where reg.active_status='ACTIVE' $P!{sqlParams}
+group by reg.class_name_id]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numOfApply" class="java.lang.Long"/>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="315" y="10" width="250" height="30" uuid="5287ccb0-ca1d-4384-8270-2853382b1ad6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Online Application ]]></text>
+			</staticText>
+			<image onErrorType="Icon">
+				<reportElement x="10" y="10" width="160" height="40" uuid="4bee924e-226f-4636-bdfd-e408f9d7368c"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="555" height="20" uuid="a7184588-1ad1-4443-8e93-3cec7de4dad3"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="20" uuid="b9e91a11-7bff-4d4e-a472-7e95937b20a8"/>
+					<box leftPadding="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="172" y="0" width="188" height="20" uuid="6fe641ad-2727-4762-a450-83b2606352a4"/>
+					<box leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Applicant Status]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="142" height="20" uuid="82559a23-eb56-4e03-a48b-a9527c150772"/>
+					<box leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Class Name ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="0" width="195" height="20" uuid="fe9f6323-659b-4833-9bcc-fc39d69e33f6"/>
+					<box leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Number Of Apply]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="30" height="20" uuid="fd36e4e8-1d00-4a6d-9085-a7085ad9738c"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="40" y="0" width="142" height="20" uuid="e6115c3a-1fd5-49e6-b8f6-603ee58384e9"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="370" y="0" width="195" height="20" uuid="809b91b2-4260-4ff3-84fd-7ef109a352e4"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numOfApply}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="0" width="188" height="20" uuid="816e21ba-3dfd-4332-815d-de91a9c35544"/>
+				<box leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{applicantStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="0" width="90" height="15" uuid="eda0325c-02fe-47eb-9dca-a3fb15ea2843"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

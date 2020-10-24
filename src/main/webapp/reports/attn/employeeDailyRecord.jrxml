@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employeeDailyRecord" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="fd2ffd4a-294c-44a5-8a41-0a2acf5468c2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="department" class="java.lang.String"/>
+	<parameter name="schoolAddress" class="java.lang.String"/>
+	<parameter name="creditLine" class="java.lang.String"/>
+	<parameter name="schoolName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="pStatus" class="java.lang.String"/>
+	<field name="inTime" class="java.sql.Timestamp"/>
+	<field name="outTime" class="java.sql.Timestamp"/>
+	<field name="recordDay" class="java.util.Date"/>
+	<field name="dayType" class="java.lang.String"/>
+	<field name="empId" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<variable name="totalEmp" class="java.lang.Integer" resetType="Group" resetGroup="recordDate" calculation="Count">
+		<variableExpression><![CDATA[$F{empId}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalPresent" class="java.lang.Integer" resetType="Group" resetGroup="recordDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{pStatus}=="Present" || $F{pStatus}=="Late"?1:0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalLeave" class="java.lang.Integer" resetType="Group" resetGroup="recordDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{pStatus}=="Leave"?1:0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalAbsent" class="java.lang.Integer" resetType="Group" resetGroup="recordDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{pStatus}=="Absent"?1:0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="totalLate" class="java.lang.Integer" resetType="Group" resetGroup="recordDate" calculation="Sum">
+		<variableExpression><![CDATA[$F{pStatus}=="Late"?1:0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="recordDate" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{recordDay}]]></groupExpression>
+		<groupFooter>
+			<band height="29">
+				<textField>
+					<reportElement x="32" y="5" width="120" height="20" uuid="3a13a9b0-cb54-4057-af01-cb1060edcc1c"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total Employee: "+$V{totalEmp}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="152" y="5" width="100" height="20" uuid="d96a2417-baea-469d-b34f-49ac0f7699a0"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Present: "+$V{totalPresent}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="252" y="5" width="100" height="20" uuid="c259c32a-c2b3-4729-8966-3a55c152158b"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Leave: "+$V{totalLeave}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="352" y="5" width="100" height="20" uuid="90cce071-5038-45fd-b6a3-14e265791fdf"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Absent: "+$V{totalAbsent}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="452" y="5" width="100" height="20" uuid="0026797b-19e4-4766-93b3-e4a2882b25e3"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Late: "+$V{totalLate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="61" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="0" y="0" width="160" height="40" uuid="03f4f376-030e-4f8f-98e6-415ef04307ba"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="400" y="0" width="175" height="30" uuid="0a31940a-4578-4a53-9cd2-56334d53bd21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Attendance Report]]></text>
+			</staticText>
+			<textField pattern="EEEEE, dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="210" height="20" uuid="2542449d-743e-411e-9dc2-a8f90e742b36"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{recordDay}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="475" y="40" width="100" height="20" uuid="a83888f3-b273-4016-8582-8ff91075c2c3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dayType}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="40" width="173" height="20" uuid="8c505caf-1eec-4d70-9bd5-2713285ca040"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Department : "+$P{department}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="216" height="20" uuid="c9937bdd-feb3-45f5-9814-14e76f0f8b6c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="20" width="216" height="20" uuid="23db7f5e-6cea-4ee8-b770-aac0e90ebf04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="400" y="0" width="85" height="20" uuid="f24ff30a-daac-4c7e-84e6-fc06ceb31ffb"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[In Time ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="0" width="90" height="20" uuid="ad293bec-a859-4c72-b3ee-0cec6df9cf73"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Out Time ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20" uuid="c68176bd-5d39-4a6c-955d-b4d96dcf2c7e"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="85" height="20" uuid="be4bd6df-b976-401d-8ba2-c4a7e393e8fc"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="0" width="212" height="20" uuid="f21e43c2-5300-4c47-a14a-d12bad5bbf32"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Name & Designation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="63" height="20" uuid="4bb0d479-5b59-4f0e-b81a-41ad5051fd5f"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Emp ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="h.mm a" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="400" y="0" width="85" height="20" uuid="0b1eebc9-9646-418e-aea2-36665c2cb460"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{inTime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="h.mm a" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="485" y="0" width="90" height="20" uuid="f09b68fd-ea77-47ff-8bfe-a33ef2f0f29b"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{outTime}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="315" y="0" width="85" height="20" uuid="ebd165ef-f670-4e2d-b326-71428ee359cd"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="40" height="20" uuid="67fa7a7a-30fc-455c-a816-cbad2ab5db26"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{recordDate_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="0" width="212" height="20" uuid="62c1f93a-ad77-4187-abb1-416582297d1d"/>
+				<box leftPadding="5" rightPadding="0">
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="63" height="20" uuid="30404e9b-2327-472a-93dc-60404fbf39fb"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{empId}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="442" y="0" width="80" height="20" uuid="ad1217f8-9188-4aec-84c6-e6e5b48d3875"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="0" width="140" height="20" uuid="b6ef6990-89dd-4cbe-b001-4d072721aad5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="522" y="0" width="40" height="20" uuid="b5dfcc43-c73a-45e0-bbd8-4e1760415069"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="292" height="20" uuid="770d8ddd-5ed2-45c0-b738-95b1fca4eade"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{creditLine}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

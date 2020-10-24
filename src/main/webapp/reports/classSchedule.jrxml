@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="classSchedule" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="40"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="sectionName" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="secTeacher" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sectionId" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    cp.name, cp.period, cp.is_play_time,
+
+	csd.sun_class_schedule_id,
+    csd.sun_desc,
+    csd.sun_employee,
+    csd.sun_subject,
+
+	csd.mon_desc,
+    csd.mon_employee,
+    csd.mon_subject,
+
+	csd.tue_class_schedule_id,
+    csd.tue_desc,
+    csd.tue_employee,
+    csd.tue_subject,
+
+	csd.wed_class_schedule_id,
+    csd.wed_desc,
+    csd.wed_employee,
+    csd.wed_subject,
+
+    csd.thu_class_schedule_id,
+    csd.thu_desc,
+    csd.thu_employee,
+    csd.thu_subject
+
+
+FROM class_schedule_details csd
+inner join class_period cp on csd.class_period_id=cp.id
+where csd.section_id=$P{sectionId}]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="period" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_play_time" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sun_class_schedule_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sun_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sun_employee" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sun_subject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mon_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mon_employee" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mon_subject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tue_class_schedule_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tue_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tue_employee" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tue_subject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="wed_class_schedule_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="wed_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="wed_employee" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="wed_subject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thu_class_schedule_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thu_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thu_employee" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thu_subject" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="572" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="752" height="572" uuid="d7d3ccb9-c32f-448a-bbd6-fc3f40504707"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<frame>
+					<reportElement x="3" y="3" width="746" height="566" uuid="cbc7f562-537c-4152-9032-002b2114afd4"/>
+					<box>
+						<topPen lineWidth="2.0" lineColor="#000066"/>
+						<leftPen lineWidth="2.0" lineColor="#000066"/>
+						<bottomPen lineWidth="2.0" lineColor="#000066"/>
+						<rightPen lineWidth="2.0" lineColor="#000066"/>
+					</box>
+				</frame>
+			</frame>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="5" y="5" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="264" y="5" width="278" height="30" forecolor="#006600" uuid="8ea103e9-4494-4aa7-88fe-aaa07a2acd6c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Schedule for "+$P{sectionName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="36" width="228" height="20" uuid="523e0565-35d4-4d7f-a429-e6993276d3ad"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Class In charge: "+$P{secTeacher}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="0" width="117" height="25" forecolor="#CC33FF" backcolor="#CCCCCC" uuid="7f4c347a-4683-4ebd-82e6-d135bb07c73d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Days]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="25" width="117" height="25" forecolor="#CC33FF" backcolor="#CCCCCC" uuid="62d7a7d0-3fda-43a8-982e-e5c547689c3b"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periods]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="122" y="0" width="125" height="50" forecolor="#FF6666" backcolor="#CCFFCC" uuid="c86c08aa-a44b-4f97-9ae1-3dcad4b05db2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUNDAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="247" y="0" width="125" height="50" forecolor="#FF6666" backcolor="#CCFFCC" uuid="5f6ed907-9cd2-4a78-971e-216324c1487f"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONDAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="372" y="0" width="125" height="50" forecolor="#FF6666" backcolor="#CCFFCC" uuid="0eac7f3c-126c-45a3-a2be-3afe1c97349a"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TUESDAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="497" y="0" width="125" height="50" forecolor="#FF6666" backcolor="#CCFFCC" uuid="48c8d1d5-df56-41be-ad2f-6e54b9ad6518"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[WEDNESDAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="622" y="0" width="125" height="50" forecolor="#FF6666" backcolor="#CCFFCC" uuid="bacdcdac-4bda-45f3-bfb1-0313f6d924d2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THURSDAY]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<frame>
+				<reportElement x="5" y="0" width="742" height="50" uuid="78d51ec9-a91c-421b-8bf9-545c649f47c4"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="0" width="117" height="25" forecolor="#CC33FF" backcolor="#CCCCCC" uuid="958a09ec-e152-44f5-874f-12a655a573af"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="617" y="0" width="125" height="25" uuid="ceebeb30-66f7-48e3-8366-754a5b8ba5bc"/>
+					<box leftPadding="5">
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{thu_subject}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="492" y="25" width="125" height="25" uuid="13629063-867d-4ab0-9061-85f093052b2f"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{wed_employee}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="367" y="0" width="125" height="25" uuid="fd213f28-3ca2-48b5-a0ee-e89a5cf8bd58"/>
+					<box leftPadding="5">
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tue_subject}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="25" width="117" height="25" forecolor="#CC33FF" backcolor="#CCCCCC" uuid="ebc98eac-1009-4486-a5af-1b09e4734490"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{period}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="617" y="25" width="125" height="25" uuid="22f217f5-6179-4c68-a01d-4060ec5c5632"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{thu_employee}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="492" y="0" width="125" height="25" uuid="6fd16912-3367-4362-9df9-22a7d90e4f33"/>
+					<box leftPadding="5">
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{wed_subject}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="242" y="0" width="125" height="25" uuid="f49ed09f-ca3a-4409-bdec-2bcd7cb23b01"/>
+					<box leftPadding="5">
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mon_subject}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="117" y="25" width="125" height="25" uuid="f913bba0-936c-4142-8da9-be1e05dbb866"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sun_employee}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="117" y="0" width="125" height="25" uuid="6ed2bc28-d5a3-4451-a6bb-479954b328d8"/>
+					<box leftPadding="5">
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{sun_subject}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="367" y="25" width="125" height="25" uuid="30479034-f5de-4e60-b08e-ed1736bb8d32"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tue_employee}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="242" y="25" width="125" height="25" uuid="28e98b06-05d4-4f4f-a9d7-1a6008c2b180"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mon_employee}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Opaque" x="117" y="0" width="625" height="50" uuid="02c50bb1-baf4-4a9a-93c1-640d3b42a49a">
+						<printWhenExpression><![CDATA[$F{is_play_time}]]></printWhenExpression>
+					</reportElement>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="580" y="30" width="170" height="25" uuid="40316dc7-fac9-4073-840e-2e8a688825a3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Principal]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

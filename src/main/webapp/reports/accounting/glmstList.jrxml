@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="glmstList" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fecccbfc-c865-4984-a7b7-8790302577ab">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.layers" value="##Thu Mar 16 11:05:45 BDT 2017\nlayer.1.name=Layer 1\nlayer.1.visible=false\nlayer.1.id=1\nlayer.0.name=Background\nlayer.0.visible=true\nlayer.0.id=0"/>
+	<style name="Heading" fontSize="14"/>
+	<parameter name="schoolAddress" class="java.lang.String"/>
+	<parameter name="creditLine" class="java.lang.String"/>
+	<parameter name="schoolName" class="java.lang.String"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select  glmst.xacc xacc ,glmst.xdesc xdesc,glmst.xacctype xacctype,glmst.xmsttype xmsttype,glmst.xaccsource  xaccsource, glmst.xaccusage xaccusage ,glsub.xsub xsub,glsub.xdesc xdescsub from glmst
+inner join glsub on glsub.xacc_id = glmst.id
+where glmst.active_status = 'ACTIVE' and glsub.active_status='ACTIVE']]>
+	</queryString>
+	<field name="xacc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xdesc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xacctype" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xmsttype" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xaccsource" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xaccusage" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xsub" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="xdescsub" class="java.lang.String"/>
+	<group name="xaccGr">
+		<groupExpression><![CDATA[$F{xacc}]]></groupExpression>
+		<groupFooter>
+			<band height="1">
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="69d69298-b697-47f4-a0e6-e4fb378d2c8f"/>
+					<graphicElement>
+						<pen lineWidth="0.25"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="0" width="216" height="20" uuid="ea1cf5e8-f886-4ad2-a976-c497e13ce7f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="20" width="216" height="20" uuid="1ed14a2b-cf16-4e60-aaf6-4fe8b5627a92"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Icon">
+				<reportElement x="0" y="0" width="200" height="50" uuid="297d81ee-66eb-4c1e-bc13-f1e008690266"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="76" y="0" width="159" height="20" uuid="b88bfa14-3b73-41f2-b997-397b55875a96"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="76" height="20" uuid="6b790d7c-dfba-4e4c-a0b0-3dcb1cf703d0"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Account Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="0" width="80" height="20" uuid="639a6636-a3bb-493c-82ae-72463710008f"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Account Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="80" height="20" uuid="81c3ba92-7ed3-4544-a13f-6564fb5026ae"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sub Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="80" height="20" uuid="d5ca79e4-1acc-48b8-846b-c274bec645cd"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Usage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="80" height="20" uuid="5900a1e0-0b7f-4c43-a4c1-328c3777b1a4"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Source]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="76" height="14" uuid="53ac8dd8-6b0e-4832-af8e-b2294266c170"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{xacc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="0" width="159" height="14" uuid="fe41f6b2-c2d9-4671-9d79-e27c37ecf2e1"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textFieldExpression><![CDATA[$F{xdesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="80" height="14" uuid="09937192-f6be-4f38-b821-414f6d7ddf54"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{xacctype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="80" height="14" uuid="3c82e7b6-4ddd-4fd4-9e53-a92d8e8a99ab"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{xmsttype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="80" height="14" uuid="18dbc94e-98d8-4aa6-b035-ef116deb64f7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{xaccusage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="80" height="15" uuid="f23adcff-f632-4a95-a202-58c85f61ca83"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{xaccsource}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="14" width="67" height="16" uuid="d62a34df-ccbe-492c-be22-0bed30e43b83"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{xsub}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="14" width="92" height="16" uuid="f1ec1f25-d641-4275-bdac-48bc5b3f6adc"/>
+				<box leftPadding="4" rightPadding="1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{xdescsub}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="117" y="0" width="292" height="20" uuid="12ebcad7-e462-437c-a506-f37296729fab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{creditLine}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="0" width="62" height="20" uuid="d35b5233-fdd4-4a7a-907e-5829b9af0bd4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="49c59c36-f68b-4290-b232-9d557051440b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

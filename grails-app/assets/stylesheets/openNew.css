@@ -1,0 +1,139 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap/bootstrap.min
+*= require bootstrap/bootstrap-reset
+*= require datepicker.css
+*= require font-awesome/css/font-awesome.min
+*= require open/lightGallery.css
+*= require fullcalendar-3.9.0/fullcalendar.min
+* require fullcalendar-3.9.0/fullcalendar.print.min
+*= require edupal-calendar
+*= require open/style
+*= require open/responsive
+*= require nhs/new-layout/jquery-ui
+*= require nhs/new-layout/dataTables.bootstrap
+*= require nhs/new-layout/AdminLTE.min
+*= require nhs/new-layout/layout
+*= require nhs/new-layout/style
+*= require_self
+/* PIN BOARD */
+ul.notes li, ul.tag-list li{
+    list-style:none;
+}
+ul.notes li h4 {
+    margin-top: 20px;
+    font-size: 16px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:140px;
+    width:140px;
+    padding:1em;
+    position: relative;
+}
+
+ul.notes li div strong {
+    position: absolute;
+    top:5px;
+    right: 5px;
+    font-size: 10px
+}
+
+ul.notes li div a {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: inherit;
+}
+
+ul.notes li{
+    margin:10px 40px 50px 35px;
+    float:left;
+}
+ul.notes li div p {
+    font-size: 12px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:180px;
+    padding:1em;
+    /* Firefox */
+    -moz-box-shadow:5px 5px 2px rgba(33,33,33,1);
+    /* Safari+Chrome */
+    -webkit-box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+    /* Opera */
+    box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+}
+
+ul.notes li div{
+    -webkit-transform:rotate(-3deg);
+    -o-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+}
+
+ul.notes li:nth-child(even) div{
+    -o-transform:rotate(2deg);
+    -webkit-transform:rotate(2deg);
+    -moz-transform:rotate(2deg);
+    position:relative;
+    top:5px;
+}
+ul.notes li:nth-child(3n) div{
+    -o-transform:rotate(-2deg);
+    -webkit-transform:rotate(-2deg);
+    -moz-transform:rotate(-2deg);
+    position:relative;
+    top:-5px;
+}
+ul.notes li:nth-child(5n) div{
+    -o-transform:rotate(2deg);
+    -webkit-transform:rotate(2deg);
+    -moz-transform:rotate(2deg);
+    position:relative;
+    top:-10px;
+}
+
+ul.notes li div:hover,ul.notes li div:focus{
+
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    position:relative;
+    z-index:9999;
+}
+
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:280px;
+    padding:1em;
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition:-moz-transform .15s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-transition:-webkit-transform .15s linear;
+}
+
+.overflowHid{
+    min-height: 350px;
+    height: 350px;
+    overflow: hidden;
+}

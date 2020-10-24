@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="meritListReport" language="groovy" pageWidth="591" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="551" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="examId" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="examName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sqlParam" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clsStdCount" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clsFailCount" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clsPassCount" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cls.name clsName, sec.name secName, st.name stdName, st.studentid, st.roll_no,
+ta.result_status, ta.position_in_class, ta.class_str_position, ta.position_in_section, ta.section_str_position,ta.total_obtain_mark grandTotal,ta.failed_sub_counter
+from tabulation_ct ta
+inner join student st on ta.student_id = st.id
+inner join section sec on st.section_id = sec.id
+inner join class_name cls on st.class_name_id = cls.id
+where $P!{sqlParam}]]>
+	</queryString>
+	<field name="clsName" class="java.lang.String"/>
+	<field name="secName" class="java.lang.String"/>
+	<field name="stdName" class="java.lang.String"/>
+	<field name="studentid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="roll_no" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="result_status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="position_in_class" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="class_str_position" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="position_in_section" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="section_str_position" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="grandTotal" class="java.lang.Double"/>
+	<field name="failed_sub_counter" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="secPassCount" class="java.lang.Integer" resetType="Group" resetGroup="sectionName" calculation="Sum">
+		<variableExpression><![CDATA[$F{result_status} =='PASSED' ? 1 : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="className">
+		<groupExpression><![CDATA[$F{clsName}]]></groupExpression>
+	</group>
+	<group name="sectionName" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{secName}]]></groupExpression>
+		<groupFooter>
+			<band height="76" splitType="Stretch">
+				<staticText>
+					<reportElement x="10" y="11" width="140" height="20" uuid="32c44e88-1896-4fa6-a312-aca0205fb92f"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Student in Class:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="31" width="140" height="20" uuid="aa412a6e-7340-4c20-b08d-7a7b7c0e0272"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Pass in Class:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="51" width="140" height="20" uuid="9673a627-73a8-4fcc-93e1-ca3363140ec8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Fail in Class:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="150" y="11" width="60" height="20" uuid="88f65bfa-b5b6-4e91-b134-c6d58599dea8"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{clsStdCount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="150" y="31" width="60" height="20" uuid="086dd244-4c43-4812-944f-282f309f6a58"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{clsPassCount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="150" y="51" width="60" height="20" uuid="dc01b06b-c64b-4cfe-bb84-2099ba33ccb0"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{clsFailCount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="490" y="31" width="60" height="20" uuid="6242548c-5c46-44c5-92ec-3f6e2bfa6e78"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{secPassCount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="490" y="51" width="60" height="20" uuid="c2a73f13-12df-4223-b1f7-ae9649855880"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sectionName_COUNT}-$V{secPassCount}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="350" y="11" width="140" height="20" uuid="29e66156-836a-4ace-8c54-10f030cf759a"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Student in Section:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="350" y="31" width="140" height="20" uuid="33762d25-ba4f-4bc6-a4a6-659ac65bf47e"/>
+					<textElement verticalAlignment="Middle" markup="none">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Pass in Section:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="350" y="51" width="140" height="20" uuid="9ecc2d60-e9fb-4d73-9001-d1e799d747e7"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Fail in Section:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="490" y="11" width="60" height="20" uuid="1c676b4d-3f16-48f5-b3b1-8ccc71842bf3"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sectionName_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="85" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="10" y="0" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="212" y="30" width="339" height="20" forecolor="#006600" uuid="9e7939e2-71d5-407d-bbd0-a35bc335d1b6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CT MERIT LIST]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="0" width="341" height="30" forecolor="#006600" uuid="ba21ecb3-912e-4c03-a18d-7fcbe103449b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{examName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="57" width="275" height="20" isRemoveLineWhenBlank="true" uuid="e5e38547-8e6f-4dd3-ab59-86df14bd2b15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Class Name: "+$F{clsName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="57" width="266" height="20" isRemoveLineWhenBlank="true" uuid="fd1d0ed5-9ea0-4250-8ab3-0b6db13d4dfc"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Section: "+$F{secName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<staticText>
+				<reportElement x="10" y="0" width="30" height="30" uuid="f3d6e144-caa3-4a7f-8a9f-fe20d3a7696b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="0" width="35" height="30" uuid="90430653-3799-42b7-b12e-3e13875af2b3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Roll ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="0" width="70" height="30" uuid="0a718523-d124-408c-959e-26039e0da3d3"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Section Merit Position]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="0" width="50" height="30" uuid="4c888c4c-8bc1-48a0-804e-d2dd8469656d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Result]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="0" width="127" height="30" isPrintWhenDetailOverflows="true" uuid="76d7c15f-ccd7-4f8d-af03-c77d69289c40"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Student Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="0" width="70" height="30" uuid="a2815556-0168-4c29-ba67-02f6e909a596"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class Merit Position]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="0" width="50" height="30" uuid="f67dbc6e-ad9a-4b2b-ad38-ad5e9dc5b54b"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Total Mark]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="45" height="30" uuid="cabfc01c-619d-4025-81fc-8647bcb2e563"/>
+				<box leftPadding="4" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fail Subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="64" height="30" isPrintWhenDetailOverflows="true" uuid="3e08cda8-cf89-47c2-8b13-ffbc7cfc376b"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Std ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="10" y="0" width="30" height="20" uuid="d88bae4f-3801-4fe6-ba0c-d0276a84b5ca"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sectionName_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="231" y="0" width="35" height="20" uuid="4274acbe-8fda-4d5a-b777-7a587ea27972"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{roll_no}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="361" y="0" width="70" height="20" uuid="88973fcd-cfa5-4ef4-baa3-6b235d28ac8f"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{section_str_position}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="501" y="0" width="50" height="20" uuid="547f5a9f-2f16-47dc-9598-7281eaf65004"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{result_status}=="PASSED"?"Pass":"Fail"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="104" y="0" width="127" height="20" uuid="e06b724d-56cf-4f19-a664-636e77784b2d"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{stdName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="431" y="0" width="70" height="20" uuid="6102da06-b117-442b-b596-bbdc4605596e"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{class_str_position}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="266" y="0" width="50" height="20" uuid="82e02417-a78f-49c0-8439-2b20614860d7"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="316" y="0" width="45" height="20" uuid="f4ab53e5-62b9-450b-ab5d-8f7ab985cf56"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{failed_sub_counter}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="40" y="0" width="64" height="20" uuid="3a525478-4309-481e-9460-13e389c39849"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{studentid}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="25" width="200" height="25" uuid="33210306-2a33-4546-960c-a7e7df9a041c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class Teacher's Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="25" width="200" height="25" uuid="cde9b307-42b3-4550-8634-8477e779557c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Head Teacher's Signature ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

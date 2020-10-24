@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoiceReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" scriptletClass="com.dreamapps.NumberToText" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="invoiceId" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT inv.invoice_no invNo, inv.invoice_date invDate, inv.amount as invPayable, inv.discount invDiscount, inv.payment invPayment,
+std.studentid, std.name stdName, std.roll_no rollNo, cName.name clsName, section.name sName,fItems.code as feeCode,
+fItems.name as feeName, invDtl.description, invDtl.amount, invDtl.discount, invDtl.net_payment, invDtl.quantity, invDtl.total_payment as itemPayment
+FROM invoice inv
+inner join student std on inv.student_id = std.id
+inner join section section on std.section_id=section.id
+inner join class_name cName on std.class_name_id=cName.id
+inner join invoice_details invDtl  on inv.id = invDtl.invoice_id
+inner join fee_items fItems on invDtl.fee_items_id = fItems.id
+ where inv.id=$P{invoiceId}]]>
+	</queryString>
+	<field name="invNo" class="java.lang.String"/>
+	<field name="invDate" class="java.sql.Timestamp"/>
+	<field name="invPayable" class="java.lang.Double"/>
+	<field name="invDiscount" class="java.lang.Double"/>
+	<field name="invPayment" class="java.lang.Double"/>
+	<field name="studentid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stdName" class="java.lang.String"/>
+	<field name="rollNo" class="java.lang.Integer"/>
+	<field name="clsName" class="java.lang.String"/>
+	<field name="sName" class="java.lang.String"/>
+	<field name="feeCode" class="java.lang.Integer"/>
+	<field name="feeName" class="java.lang.String"/>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="net_payment" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="itemPayment" class="java.lang.Double"/>
+	<variable name="descriptionTxt" class="java.lang.String" resetType="Column">
+		<variableExpression><![CDATA[$F{description}?" ( "+$F{description}+" ) ":" "]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="10" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="812">
+			<line>
+				<reportElement x="0" y="407" width="575" height="1" uuid="8662a883-3409-483c-a4a3-9de7a663d6ae"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="0" y="0" width="575" height="396" uuid="13a18b95-5f85-42dd-8f6c-5f455523fd3d"/>
+				<subreportParameter name="REPORT_LOGO"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="invoiceId"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "invoiceReport_supreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="416" width="575" height="396" uuid="f97156a1-8e41-46b3-b1b2-c2bfd981b286"/>
+				<subreportParameter name="REPORT_LOGO"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="invoiceId"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "invoiceReport_supreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

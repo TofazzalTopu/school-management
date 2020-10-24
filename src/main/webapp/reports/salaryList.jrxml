@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="salaryList" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="35cbf4e7-9ad0-4f5a-abb9-57e05559479f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="26"/>
+	<property name="ireport.y" value="19"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<parameter name="academicYear" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT s.name, ed.name as months, s.salary_date, ba.account_name, bf.amount as bank_amount,cf.amount as cash_amount FROM salary_info s
+LEFT JOIN expense_detail ed ON ed.id = s.expense_detail_id
+LEFT JOIN bank_accounts ba ON ba.id = s.bank_accounts_id
+LEFT JOIN bank_flow bf ON bf.id = s.bank_flow_id
+LEFT JOIN cash_flow cf ON ba.id = s.cash_flow_id
+WHERE s.academic_year=$P{academicYear}
+ORDER BY s.salary_date ASC]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="months" class="java.lang.String"/>
+	<field name="salary_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="account_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bank_amount" class="java.lang.Double"/>
+	<field name="cash_amount" class="java.lang.Double"/>
+	<variable name="totalEmpPay" class="java.lang.Double" resetType="Column">
+		<variableExpression><![CDATA[$F{bank_amount}+$F{cash_amount}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="575" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="820" height="573" uuid="26316a52-9ed7-41e6-83a0-b0771dce6309"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<frame>
+					<reportElement x="3" y="3" width="814" height="567" uuid="ed1ec2f5-fc42-4863-9962-ef8759ba1d66"/>
+					<box>
+						<topPen lineWidth="2.0" lineColor="#000066"/>
+						<leftPen lineWidth="2.0" lineColor="#000066"/>
+						<bottomPen lineWidth="2.0" lineColor="#000066"/>
+						<rightPen lineWidth="2.0" lineColor="#000066"/>
+					</box>
+				</frame>
+			</frame>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="424" y="23" width="285" height="45" forecolor="#FF9966" uuid="5287ccb0-ca1d-4384-8270-2853382b1ad6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salary List]]></text>
+			</staticText>
+			<image onErrorType="Icon">
+				<reportElement x="124" y="18" width="200" height="50" uuid="4bee924e-226f-4636-bdfd-e408f9d7368c"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="800" height="25" backcolor="#CCCCFF" uuid="a7184588-1ad1-4443-8e93-3cec7de4dad3"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="144" y="0" width="110" height="25" uuid="ff48c1b7-5764-4356-a35d-3969a1a37932"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Month]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="254" y="0" width="130" height="25" uuid="82559a23-eb56-4e03-a48b-a9527c150772"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Salary Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="699" y="0" width="101" height="25" uuid="38ba5785-5c09-497d-95da-b052a9eec779"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="25" uuid="b9e91a11-7bff-4d4e-a472-7e95937b20a8"/>
+					<box leftPadding="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="114" height="25" uuid="f300ef34-78f6-4d73-b6b7-040bb07ba977"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="384" y="0" width="114" height="25" uuid="f5a52a66-c046-401d-ad7c-87a6612a543d"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Bank Account]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="498" y="0" width="114" height="25" uuid="71f831c2-e256-44a3-9c46-627401e112b4"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Bank Pay]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="612" y="0" width="87" height="25" uuid="4d2e78ad-1e34-49e8-85a7-e3b3b831c0b7"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cash Pay]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="114" height="20" uuid="366e5070-7863-4dc2-aa6e-544fa16b4b2a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="0" width="130" height="20" uuid="567122cd-30ab-4854-8b41-c642bb62cc73"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{salary_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="0" width="114" height="20" uuid="e1f69f36-7433-49da-bec0-16c029d4e51b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{account_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="508" y="0" width="114" height="20" uuid="3d6409a6-7516-49c6-81b3-332f43efe80f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{bank_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="622" y="0" width="87" height="20" uuid="d449b1c7-8c48-4c28-b154-9f131fc74e98"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cash_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="110" height="20" uuid="781bdda5-4910-4837-824d-4d6e2cb740bb"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{months}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="30" height="20" uuid="628f80d4-0711-4c82-abfa-829420d60933"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="710" y="0" width="100" height="20" uuid="046b9056-5590-4a0d-86eb-ca2857a9d2d2"/>
+				<textFieldExpression><![CDATA[$V{totalEmpPay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

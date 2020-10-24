@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bookTransaction" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT b.book_id AS bookid, bd.name, s.name AS s_name,s.studentid AS s_studentid,em.name AS emp_name,em.empid AS emp_id, bt.fine, bt.submission_date, bt.return_type, bt.return_date  FROM book_transaction bt
+LEFT JOIN student s ON bt.student_id = s.id
+LEFT JOIN employee em ON bt.employee_id = em.id
+LEFT JOIN book b ON bt.book_id = b.id
+LEFT JOIN book_details bd ON b.book_details_id = bd.id
+LEFT JOIN book_category cat ON bd.category_id = cat.id
+WHERE 1
+ORDER BY cat.name ASC]]>
+	</queryString>
+	<field name="bookid" class="java.lang.String"/>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="s_name" class="java.lang.String"/>
+	<field name="s_studentid" class="java.lang.String"/>
+	<field name="emp_name" class="java.lang.String"/>
+	<field name="emp_id" class="java.lang.String"/>
+	<field name="fine" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="submission_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="sectionName" isStartNewColumn="true" isStartNewPage="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<frame>
+					<reportElement mode="Opaque" x="10" y="0" width="555" height="20" uuid="ba4e2f7b-db62-49ab-b5e9-804eaa655ab9"/>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="30" y="0" width="120" height="20" uuid="377cac9a-5a3d-49a8-b8d8-9ff1919541fe"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Book ID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="150" y="0" width="90" height="20" uuid="868fd287-6e5e-4b51-a0d3-503e12b09a67"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Book Name]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="470" y="0" width="85" height="20" uuid="321e6a19-9a7c-4941-a0a4-a63f3bf8ff25"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Return Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="0" width="30" height="20" uuid="a3090e61-2f1f-450d-9b68-cb600ed2756d"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[SL]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="240" y="0" width="158" height="20" uuid="97826fb3-2d7b-4be5-bb88-79fea171516c"/>
+						<box leftPadding="4">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Borrower]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="398" y="0" width="37" height="20" uuid="fdb7c24b-f80e-494b-9c3d-6a20fdcd5792"/>
+						<box leftPadding="4">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fine]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="435" y="0" width="35" height="20" uuid="4ee7303e-6dd8-41a8-81d5-1f307a8c0a8e"/>
+						<box leftPadding="0">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Return Book]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="67" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="10" y="10" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="329" y="10" width="236" height="30" uuid="5ade3aeb-d81f-4488-9fd9-388ab7c5c659"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Book List]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="17" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="30"/>
+	</pageFooter>
+</jasperReport>

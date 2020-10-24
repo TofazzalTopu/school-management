@@ -1,0 +1,143 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap/bootstrap.min
+*= require bootstrap/bootstrap-reset
+*= require font-awesome/css/font-awesome.min
+*= require ../open/style
+*= require ../open/responsive
+*= require ../open/layout-semiboxed
+*= require_self
+*/
+/* PIN BOARD */
+ul.notes li, ul.tag-list li{
+    list-style:none;
+}
+ul.notes li h4 {
+    margin-top: 20px;
+    font-size: 16px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:140px;
+    width:140px;
+    padding:1em;
+    position: relative;
+}
+
+ul.notes li div strong {
+    position: absolute;
+    top:5px;
+    right: 5px;
+    font-size: 10px
+}
+
+ul.notes li div a {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: inherit;
+}
+
+ul.notes li{
+    margin:10px 40px 50px 35px;
+    float:left;
+}
+ul.notes li div p {
+    font-size: 12px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:180px;
+    padding:1em;
+    /* Firefox */
+    -moz-box-shadow:5px 5px 2px rgba(33,33,33,1);
+    /* Safari+Chrome */
+    -webkit-box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+    /* Opera */
+    box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+}
+
+ul.notes li div{
+    -webkit-transform:rotate(-6deg);
+    -o-transform:rotate(-6deg);
+    -moz-transform:rotate(-6deg);
+}
+
+ul.notes li:nth-child(even) div{
+    -o-transform:rotate(4deg);
+    -webkit-transform:rotate(4deg);
+    -moz-transform:rotate(4deg);
+    position:relative;
+    top:5px;
+}
+ul.notes li:nth-child(3n) div{
+    -o-transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    position:relative;
+    top:-5px;
+}
+ul.notes li:nth-child(5n) div{
+    -o-transform:rotate(5deg);
+    -webkit-transform:rotate(5deg);
+    -moz-transform:rotate(5deg);
+    position:relative;
+    top:-10px;
+}
+
+ul.notes li div:hover,ul.notes li div:focus{
+
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    position:relative;
+    z-index:9999;
+}
+
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:280px;
+    padding:1em;
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition:-moz-transform .15s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-transition:-webkit-transform .15s linear;
+}
+
+.modal-header {
+    background-color: rgba(185, 47, 18, 0.81);
+    border: medium none #972212;
+}
+.modal-title {
+    color: #fff;
+    font-weight: bold;
+}
+.modal-big {
+    width: 1050px;
+}
+.modal-mid {
+    width: 900px;
+}
+.modal {
+    overflow-y: scroll;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="attnStdDailyPresentAbsentCount_subreport1" language="groovy" pageWidth="435" pageHeight="802" columnWidth="435" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="270aa25d-2bad-4312-8366-226f48ff3f2d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="recordDay" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT count(*) totalStudent, (SELECT count(*)
+      FROM attn_record_day rd
+      inner join attn_std_record sr on rd.id = sr.record_day_id
+      inner join student std on std.id = sr.student_id
+      where rd.id=$P{recordDay}) presentCount
+      FROM student where active_status='ACTIVE' and student_status='NEW' and academic_year='Y2016']]>
+	</queryString>
+	<field name="totalStudent" class="java.lang.Long"/>
+	<field name="presentCount" class="java.lang.Long"/>
+	<variable name="absentCount" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{totalStudent}-$F{presentCount}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="145" height="20" uuid="70346405-6ed2-4b08-bb49-35e082f21b17"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalStudent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="0" width="145" height="20" uuid="c44d3b0d-24ef-4753-b96e-f8870524e0e3"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{presentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="145" height="20" uuid="cedbf952-a608-4417-98a6-a415ddd79c36"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<rightPen lineWidth="0.5" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{absentCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="leaveReportByAllEmployee" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="schoolName" class="java.lang.String"/>
+	<parameter name="schoolAddress" class="java.lang.String"/>
+	<parameter name="creditLine" class="java.lang.String"/>
+	<parameter name="employeeId" class="java.lang.String"/>
+	<parameter name="employeeName" class="java.lang.String"/>
+	<parameter name="empDesignation" class="java.lang.String"/>
+	<parameter name="workingYear" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="leaveName" class="java.lang.String"/>
+	<field name="allowedDay" class="java.lang.String"/>
+	<field name="obtainLeave" class="java.lang.String"/>
+	<field name="leaveDue" class="java.lang.String"/>
+	<pageHeader>
+		<band height="67" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="0" y="0" width="184" height="40" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="452" y="0" width="123" height="30" uuid="5ade3aeb-d81f-4488-9fd9-388ab7c5c659"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="235" y="20" width="147" height="20" uuid="a102f1de-85c4-4de2-a013-8882780c0e6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="147" height="20" uuid="e3267279-e242-434b-80d6-0e30f38b0969"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="47" width="100" height="20" uuid="639a97f4-a497-4065-ae23-c3fd05a8a609"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["EMP ID: "+$P{employeeId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="47" width="352" height="20" uuid="31f4396f-0fe8-449b-a9a6-91227f85d012"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{employeeName}+", "+$P{empDesignation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="47" width="100" height="20" uuid="a14fdda7-e723-48c3-97ef-05cf61f0f143"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Year: "+$P{workingYear}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="30" y="0" width="218" height="20" uuid="377cac9a-5a3d-49a8-b8d8-9ff1919541fe"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="0" width="114" height="20" uuid="868fd287-6e5e-4b51-a0d3-503e12b09a67"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Allowed Day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="0" width="113" height="20" uuid="97826fb3-2d7b-4be5-bb88-79fea171516c"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Obtain]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="100" height="20" uuid="fdb7c24b-f80e-494b-9c3d-6a20fdcd5792"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Leave Due]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="20" uuid="a3090e61-2f1f-450d-9b68-cb600ed2756d"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="30" height="15" uuid="8787d195-ce93-4517-be95-b628eb63fb2b"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="218" height="15" uuid="a121b267-7798-4fd0-970e-e7daca9d8f76"/>
+				<box leftPadding="3">
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{leaveName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="114" height="15" uuid="ecf0c0ba-9524-4775-88c1-62789a03e417"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{allowedDay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="113" height="15" uuid="d4c22d19-c56e-4a94-abc6-2b15fb50d3ff"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{obtainLeave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="100" height="15" uuid="da3f6089-f6a9-4504-9292-5e4e10515a68"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{leaveDue}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="0" y="0" width="575" height="15" uuid="c4124e1a-92f7-4e06-9c6d-0ad549788067"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{creditLine}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="voucher" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="822" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="35cbf4e7-9ad0-4f5a-abb9-57e05559479f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="26"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT v.voucher_no,v.name, vd.voucher_dt_no,v.payment_type, CONCAT(UPPER(SUBSTR(REPLACE(v.payment_type, '_',' '),1,1)), LOWER(SUBSTR( REPLACE(v.payment_type, '_',' '),2))) AS pay_type_small, v.voucher_date, v.total_amount, vnd.name AS vendor_name, vd.amount,vd.unit_price,vd.quantity,ed.name asexp_dt_name  FROM voucher_details vd
+LEFT JOIN voucher v ON vd.voucher_id = v.id
+LEFT JOIN vendor vnd ON v.vendor_id = vnd.id
+LEFT JOIN expense_detail ed ON vd.expense_detail_id = ed.id
+LEFT JOIN expense_item exi ON v.expense_item_id = exi.id
+WHERE $P!{sqlParam}
+ORDER BY v.id asc,vd.id ASC]]>
+	</queryString>
+	<field name="voucher_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="voucher_dt_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="payment_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pay_type_small" class="java.lang.String"/>
+	<field name="voucher_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vendor_name" class="java.lang.String"/>
+	<field name="amount" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unit_price" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asexp_dt_name" class="java.lang.String"/>
+	<variable name="totalVoucherAmount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<group name="voucher_no">
+		<groupExpression><![CDATA[$F{voucher_no}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<frame>
+					<reportElement mode="Opaque" x="10" y="0" width="800" height="25" backcolor="#CCCCCC" uuid="bbb85dd6-9315-4f9f-b920-7bbb35c2ee50"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textField>
+						<reportElement x="0" y="0" width="155" height="25" backcolor="#00CC99" uuid="b26cf825-a7d8-4fec-bff2-84a3e8cc9033"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{voucher_no}]]></textFieldExpression>
+					</textField>
+					<textField pattern="MMMMM dd, yyyy">
+						<reportElement x="429" y="0" width="125" height="25" backcolor="#00CC99" uuid="dfa9332a-dd23-4252-92a2-47bdffee52cb"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{voucher_date}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="155" y="0" width="159" height="25" backcolor="#00CC99" uuid="069f00c4-7035-489f-a165-be3663394f97"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="554" y="0" width="104" height="25" backcolor="#00CC99" uuid="efbcbfd1-c1c5-46aa-a622-78683ee7ead0"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{payment_type}!=null? $F{pay_type_small} +' Pay':' Not Applicable']]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="658" y="0" width="142" height="25" backcolor="#00CC99" uuid="0f1ac656-4175-4364-95c9-1fb70cc731b0"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{total_amount}]]></textFieldExpression>
+					</textField>
+					<textField pattern="MMMMM dd, yyyy">
+						<reportElement x="314" y="0" width="115" height="25" backcolor="#00CC99" uuid="0414a926-2bfb-4ee8-8c97-6ca83b969f88"/>
+						<box>
+							<pen lineWidth="0.5"/>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+							<bottomPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{vendor_name}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="575" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="820" height="573" uuid="26316a52-9ed7-41e6-83a0-b0771dce6309"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<frame>
+					<reportElement x="3" y="3" width="814" height="567" uuid="ed1ec2f5-fc42-4863-9962-ef8759ba1d66"/>
+					<box>
+						<topPen lineWidth="2.0" lineColor="#000066"/>
+						<leftPen lineWidth="2.0" lineColor="#000066"/>
+						<bottomPen lineWidth="2.0" lineColor="#000066"/>
+						<rightPen lineWidth="2.0" lineColor="#000066"/>
+					</box>
+				</frame>
+			</frame>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="424" y="23" width="285" height="45" forecolor="#FF9966" uuid="5287ccb0-ca1d-4384-8270-2853382b1ad6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Voucher List]]></text>
+			</staticText>
+			<image onErrorType="Icon">
+				<reportElement x="124" y="18" width="200" height="50" uuid="4bee924e-226f-4636-bdfd-e408f9d7368c"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="800" height="25" backcolor="#CCCCFF" uuid="a7184588-1ad1-4443-8e93-3cec7de4dad3"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="239" y="0" width="153" height="25" uuid="82559a23-eb56-4e03-a48b-a9527c150772"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="632" y="0" width="168" height="25" uuid="38ba5785-5c09-497d-95da-b052a9eec779"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="25" uuid="b9e91a11-7bff-4d4e-a472-7e95937b20a8"/>
+					<box leftPadding="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="209" height="25" uuid="f300ef34-78f6-4d73-b6b7-040bb07ba977"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Voucher No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="392" y="0" width="140" height="25" uuid="aa8b6940-1300-449d-8b90-7b290c8ced24"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Quantity]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="532" y="0" width="100" height="25" uuid="34b9f19c-0413-4ff2-a4ce-214ebafe0286"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Unit Price]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement x="10" y="0" width="800" height="22" uuid="8fb7eed0-5b66-4b03-adba-97ce5c90c7b5"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="44" y="0" width="200" height="20" uuid="b38f3cc9-47b9-4271-8862-59af7ec7d9f1"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{voucher_dt_no}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="537" y="0" width="95" height="20" uuid="4e929c0f-5b84-4feb-ad7b-4f0615519347"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{unit_price}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="397" y="0" width="140" height="20" uuid="caf596a6-096e-4e30-96a0-d208cc100f99"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="632" y="0" width="168" height="20" uuid="5d88bf69-dd93-4f9c-a759-4faa9ac792be"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="244" y="0" width="153" height="20" uuid="9a9d0cdf-8f14-4db5-983e-869990a05942"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{asexp_dt_name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="44" height="20" uuid="9f36324a-b189-4049-a5c8-d8f88f470df6"/>
+					<box topPadding="0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{voucher_no_COUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

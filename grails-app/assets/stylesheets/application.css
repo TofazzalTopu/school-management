@@ -1,0 +1,457 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap/bootstrap.min
+*= require bootstrap/bootstrap-reset
+*= require font-awesome/css/font-awesome.min
+*= require datepicker
+*= require bootstrap-timepicker.min
+*= require dataTables.bootstrap
+*= require select2
+*= require open/lightGallery
+*= require open/sass-compiled
+*= require bootstrap-switch
+*= require css3clock/css/style
+*= require fullcalendar-3.9.0/fullcalendar.min
+* require fullcalendar-3.9.0/fullcalendar.print.min
+* require fullcalendar-4.0.1/core/main
+* require fullcalendar-4.0.1/daygrid/main
+*= require edupal-calendar
+*= require jquery.treegrid
+*= require morris
+*= require bootstrap-duallistbox
+*= require bootstrap-colorpicker.min
+*= require select2-bootstrap
+*= require style
+*= require style-responsive
+*= require_self
+*/
+.bootstrap-timepicker-widget {
+    z-index: 99999;
+}
+.btn-margin-left {
+    margin-left: 5px;
+}
+.btn-margin-right {
+    margin-right: 5px;
+}
+.switchery {
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    vertical-align: middle;
+    width: 50px;
+
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.switchery > small {
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    height: 30px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+}
+.panel-header-info {
+    color: #1207ff;
+    padding-right: 15px;
+}
+
+.panel-header-title{
+    font-weight: bold;
+    padding-right: 2px;
+}
+
+.customPadTop{
+    padding-top:20px;
+}
+.form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+    text-align: right;
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.alert-growl {
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: rgb(255, 255, 255);
+    border-width: 3px;
+    color: rgb(255, 255, 255);
+}
+.modal-header {
+    background-color: #2c3e50;
+    border: medium none #a7b1c2;
+}
+.modal-title {
+    color: #fff;
+    font-weight: bold;
+}
+.modal-big {
+    width: 1100px;
+}
+.modal-large {
+    width: 1000px;
+}
+.modal-small-mid {
+    width: 750px;
+}
+.modal-mid {
+    width: 900px;
+}
+.modal {
+    overflow-y: scroll;
+}
+
+
+
+
+/* ---------------------------------------------------------------------- */
+/*	Compatibility with font-awesome 3
+/* ---------------------------------------------------------------------- */
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+    *margin-right: .3em;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    text-decoration: inherit;
+    display: inline-block;
+    speak: none;
+}
+
+a [class^="icon-"],
+a [class*=" icon-"] {
+    display: inline;
+}
+
+.icon-magic:before {
+    content: "\f0d0";
+}
+
+.icon-bold:before {
+    content: "\f032";
+}
+
+.icon-italic:before {
+    content: "\f033";
+}
+
+.icon-underline:before {
+    content: "\f0cd";
+}
+
+.icon-eraser:before {
+    content: "\f12d";
+}
+
+.icon-font:before {
+    content: "\f031";
+}
+
+.icon-list-ul:before {
+    content: "\f0ca";
+}
+
+.icon-list-ol:before {
+    content: "\f0cb";
+}
+
+.icon-align-left:before {
+    content: "\f036";
+}
+
+.icon-text-height:before {
+    content: "\f034";
+}
+
+.icon-table:before {
+    content: "\f0ce";
+}
+
+.icon-link:before {
+    content: "\f0c1";
+}
+
+.icon-picture:before {
+    content: "\f03e";
+}
+
+.icon-fullscreen:before {
+    content: "\f0b2";
+}
+
+.icon-question:before {
+    content: "\f128";
+}
+
+.icon-chevron-up:before {
+    content: "\f077";
+}
+
+.icon-chevron-down:before {
+    content: "\f078";
+}
+
+.icon-arrow-left:before {
+    content: "\f060";
+}
+
+.icon-arrow-right:before {
+    content: "\f061";
+}
+
+.icon-wrench:before {
+    content: "\f0ad";
+}
+
+.icon-refresh:before {
+    content: "\f021";
+}
+
+.icon-remove:before {
+    content: "\f00d";
+}
+
+.icon-resize-full:before {
+    content: "\f065";
+}
+
+.icon-check-empty:before {
+    content: "\f096";
+}
+
+.icon-check:before {
+    content: "\f046";
+}
+
+.icon-ok:before {
+    content: "\f00c";
+}
+
+.icon-external-link-sign:before {
+    content: "\f14c";
+}
+
+.icon-double-angle-left:before {
+    content: "\f100";
+}
+
+.icon-double-angle-right:before {
+    content: "\f101";
+}
+ul.notes li, ul.tag-list li{
+    list-style:none;
+}
+ul.notes li h4 {
+    margin-top: 20px;
+    font-size: 16px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:140px;
+    width:140px;
+    padding:1em;
+    position: relative;
+}
+
+ul.notes li div small {
+    position: absolute;
+    top:5px;
+    right: 5px;
+    font-size: 10px
+}
+
+ul.notes li div a {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: inherit;
+}
+
+ul.notes li{
+    margin:10px 40px 50px 35px;
+    float:left;
+}
+ul.notes li div p {
+    font-size: 12px;
+}
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:180px;
+    padding:1em;
+    /* Firefox */
+    -moz-box-shadow:5px 5px 2px rgba(33,33,33,1);
+    /* Safari+Chrome */
+    -webkit-box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+    /* Opera */
+    box-shadow: 5px 5px 2px rgba(33,33,33,.7);
+}
+
+ul.notes li div{
+    -webkit-transform:rotate(-6deg);
+    -o-transform:rotate(-6deg);
+    -moz-transform:rotate(-6deg);
+}
+
+ul.notes li:nth-child(even) div{
+    -o-transform:rotate(4deg);
+    -webkit-transform:rotate(4deg);
+    -moz-transform:rotate(4deg);
+    position:relative;
+    top:5px;
+}
+ul.notes li:nth-child(3n) div{
+    -o-transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    position:relative;
+    top:-5px;
+}
+ul.notes li:nth-child(5n) div{
+    -o-transform:rotate(5deg);
+    -webkit-transform:rotate(5deg);
+    -moz-transform:rotate(5deg);
+    position:relative;
+    top:-10px;
+}
+
+ul.notes li div:hover,ul.notes li div:focus{
+
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    position:relative;
+    z-index:9999;
+}
+
+ul.notes li div{
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:block;
+    height:auto;
+    width:280px;
+    padding:1em;
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition:-moz-transform .15s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-transition:-webkit-transform .15s linear;
+}
+
+
+.h{
+
+    padding-top: 20px;
+
+}
+
+
+.a{
+    color:	#696969;
+}
+.b{
+    color: #2F4F4F;
+}
+
+.required-indicator{
+    color: #cc0000;
+}
+
+/*
+div.dataTables_wrapper {
+    width: 1000px;
+}*/
+.table-responsive { overflow-x: initial; }
+
+.tableOverflowScroll { overflow-x: scroll; }
+
+/*Bootstrap rating*/
+.symbol {
+    display: inline-block;
+    border-radius: 50%;
+    border: 5px double white;
+    width: 30px;
+    height: 30px;
+}
+
+.symbol-empty {
+    background-color: #ccc;
+}
+
+.symbol-filled {
+    background-color: black;
+}
+
+.rating-symbol-foreground span {
+    color: #1fb5ad;
+}
+.balanced-status-style  {
+    border: #87be76 solid 1px !important;
+    background: #ffaa8c;
+    color: #000000;
+}
+.center {
+    text-align: center;
+}
+table.table-bordered th:last-child, table.table-bordered.table-marks td:last-child {
+    border-right-width:1px;
+}
+.padding-left-20px {
+    padding-left: 20px;
+}
+.after-border {
+    position: relative;
+}
+.form-group.after-border:after {
+    content: '';
+    width: 85%;
+    height: 0;
+    position: absolute;
+    right: 15px;
+    clear: both;
+    top: 22px;
+    border: 1px dashed #f1f1f1
+}
+.label-size-color{
+    color: #cfa600;
+    font-size: 20px !important;
+    font-style: italic;
+}
+.fc-day-grid-event .fc-content{ white-space: normal!important; }
+.fc-agendaWeek-view tr {
+    height: 30px !important;
+}
+

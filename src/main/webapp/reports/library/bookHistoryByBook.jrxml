@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bookHistoryByBook" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="15"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+book.book_id,
+bd.name as bookName,
+bt.ref_id as empStdId,
+bt.ref_name as borrower,
+author.name as authorName,
+bt.issue_date,
+bt.return_date,
+bt.submission_date,
+bt.return_type
+FROM view_book_transaction bt
+INNER JOIN book ON bt.book_id = book.id
+INNER JOIN book_details bd ON book.book_details_id = bd.id
+INNER JOIN author ON bd.author_id = author.id
+WHERE
+$P!{sqlParam}
+ORDER BY bd.name asc;]]>
+	</queryString>
+	<field name="book_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bookName" class="java.lang.String"/>
+	<field name="empStdId" class="java.lang.String"/>
+	<field name="borrower" class="java.lang.String"/>
+	<field name="authorName" class="java.lang.String"/>
+	<field name="issue_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="submission_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="sectionName" isStartNewColumn="true" isStartNewPage="true" isResetPageNumber="true" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<frame>
+					<reportElement mode="Opaque" x="10" y="0" width="555" height="20" uuid="ba4e2f7b-db62-49ab-b5e9-804eaa655ab9"/>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement x="30" y="0" width="80" height="20" uuid="377cac9a-5a3d-49a8-b8d8-9ff1919541fe"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Borrower ID]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="110" y="0" width="124" height="20" uuid="868fd287-6e5e-4b51-a0d3-503e12b09a67"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Borrower Name]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="0" width="30" height="20" uuid="a3090e61-2f1f-450d-9b68-cb600ed2756d"/>
+						<box>
+							<rightPen lineWidth="0.25"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[SL]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="234" y="0" width="74" height="20" uuid="97826fb3-2d7b-4be5-bb88-79fea171516c"/>
+						<box leftPadding="4">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Return Type]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="308" y="0" width="74" height="20" uuid="4ee7303e-6dd8-41a8-81d5-1f307a8c0a8e"/>
+						<box leftPadding="0">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Issue Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="463" y="0" width="92" height="20" uuid="fdb7c24b-f80e-494b-9c3d-6a20fdcd5792"/>
+						<box leftPadding="4">
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Submission Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="382" y="0" width="81" height="20" uuid="321e6a19-9a7c-4941-a0a4-a63f3bf8ff25"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Return Date]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="10" y="10" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="329" y="10" width="236" height="30" uuid="5ade3aeb-d81f-4488-9fd9-388ab7c5c659"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Book History By Book]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="65" width="64" height="20" uuid="90e1fb0e-652c-46ae-b271-fc70ada1d636"/>
+				<text><![CDATA[Book Name : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="74" y="65" width="136" height="20" isPrintWhenDetailOverflows="true" uuid="d6df45d0-fc26-4422-9ed7-3288da9ed5d1"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{bookName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="329" y="65" width="75" height="20" uuid="92795dbf-737f-4f8d-b76a-d81df25612e9"/>
+				<text><![CDATA[Author Name :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="404" y="65" width="125" height="20" isPrintWhenDetailOverflows="true" uuid="7b4f672d-470d-45f9-928d-58842f92ada7"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{authorName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="30" height="17" isPrintWhenDetailOverflows="true" uuid="34fa35ae-9726-4f22-ba69-98864d478992"/>
+				<box>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="244" y="0" width="74" height="17" isPrintWhenDetailOverflows="true" uuid="cddec558-6ca4-4dcd-8c52-20244d811fdb"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{return_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="318" y="0" width="74" height="17" isPrintWhenDetailOverflows="true" uuid="6efa440d-52bd-4ec3-b901-6b4a309ed990"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{issue_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="392" y="0" width="81" height="17" isPrintWhenDetailOverflows="true" uuid="4930f881-4294-4c66-a91d-7be2edbc6a85"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{return_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="473" y="0" width="92" height="17" isPrintWhenDetailOverflows="true" uuid="9e97246d-4739-41d7-8b8a-b836301e52d0"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{submission_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="40" y="0" width="80" height="17" isPrintWhenDetailOverflows="true" uuid="45805c74-9158-4750-bae5-61428154a602"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{empStdId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="120" y="0" width="124" height="17" isPrintWhenDetailOverflows="true" uuid="f4bb5028-8bab-41b0-bcf3-60c2f4f2ce6b"/>
+				<box leftPadding="3" bottomPadding="2">
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{borrower}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30"/>
+	</pageFooter>
+</jasperReport>

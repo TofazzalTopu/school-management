@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="attnStdDailyPresentAbsentCount_subByclass" language="groovy" pageWidth="435" pageHeight="802" columnWidth="435" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="270aa25d-2bad-4312-8366-226f48ff3f2d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="recordDay" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="recordDate" class="java.util.Date"/>
+	<parameter name="classAndsecParam" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT cn.name clsName, sec.name secName, count(*) totalStudent,
+(SELECT count(*)
+      FROM attn_record_day rd
+      inner join attn_std_record sr on rd.id = sr.record_day_id
+      inner join student std on std.id = sr.student_id
+      where rd.id=$P{recordDay} and std.class_name_id=st.class_name_id and std.section_id=st.section_id) presentCount FROM student st
+inner join class_name cn on st.class_name_id = cn.id
+inner join section sec on st.section_id = sec.id
+where st.active_status='ACTIVE' and st.student_status='NEW' and st.academic_year='Y2016' and cn.active_status='ACTIVE' and sec.active_status='ACTIVE' and sec.academic_year='Y2016'
+$P!{classAndsecParam}
+group by cn.id, sec.id]]>
+	</queryString>
+	<field name="clsName" class="java.lang.String"/>
+	<field name="secName" class="java.lang.String"/>
+	<field name="totalStudent" class="java.lang.Long"/>
+	<field name="presentCount" class="java.lang.Long"/>
+	<variable name="absentCount" class="java.lang.Integer" resetType="Column">
+		<variableExpression><![CDATA[$F{totalStudent}-$F{presentCount}]]></variableExpression>
+	</variable>
+	<variable name="clsName_1" class="java.lang.Integer" resetType="Group" resetGroup="ClassWise" calculation="Count">
+		<variableExpression><![CDATA[$F{clsName}]]></variableExpression>
+	</variable>
+	<variable name="subtotalAbsance" class="java.lang.Long" resetType="Group" resetGroup="ClassWise" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalStudent}-$F{presentCount}]]></variableExpression>
+	</variable>
+	<variable name="subtotalPresent" class="java.lang.Long" resetType="Group" resetGroup="ClassWise" calculation="Sum">
+		<variableExpression><![CDATA[$F{presentCount}]]></variableExpression>
+	</variable>
+	<variable name="subtotalStudent" class="java.lang.Long" resetType="Group" resetGroup="ClassWise" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalStudent}]]></variableExpression>
+	</variable>
+	<group name="ClassWise">
+		<groupExpression><![CDATA[$F{clsName}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement mode="Opaque" x="267" y="0" width="85" height="20" uuid="00492406-6582-46ed-86c9-b14c22648fd9"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{subtotalPresent}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="352" y="0" width="83" height="20" uuid="79d7db92-40b0-4a61-b5e4-414cb53004e4"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{subtotalAbsance}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="146" y="0" width="121" height="20" uuid="903d4339-16b4-4650-9d96-e3cc3f0e4b71"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{subtotalStudent}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="146" height="20" uuid="42166903-89d3-46f4-bc7b-fa68efaedc66"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{recordDate})+" "+ $F{clsName} +" " +"Total"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="146" y="0" width="121" height="20" uuid="70346405-6ed2-4b08-bb49-35e082f21b17"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalStudent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="85" height="20" uuid="c44d3b0d-24ef-4753-b96e-f8870524e0e3"/>
+				<box>
+					<leftPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<bottomPen lineWidth="0.5" lineColor="#CCCCCC"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{presentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="83" height="20" uuid="cedbf952-a608-4417-98a6-a415ddd79c36"/>
+				<box>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{absentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="146" height="20" uuid="4f7cbc12-5859-4784-a79b-8c7b456cd0e0"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineColor="#000000"/>
+					<rightPen lineWidth="0.25" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clsName} + "-" +$F{secName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

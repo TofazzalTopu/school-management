@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dps" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="academicYear" class="java.lang.String"/>
+	<parameter name="salaryId" class="java.lang.Long"/>
+	<parameter name="payment_type" class="java.lang.String"/>
+	<parameter name="salaryName" class="java.lang.String"/>
+	<parameter name="total_amount" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT e.name, e.empid ,e.salary_accounts, e.dps_accounts, s.year_months AS salary_month, sd.pf_school+sd.provident_own AS total_pf,sd.net_payable, ds.name AS designation   FROM salary_details sd
+LEFT JOIN salary_info s ON s.id =sd.salary_info_id
+LEFT JOIN employee e ON e.id = sd.employee_id
+LEFT JOIN hr_designation ds ON e.hr_designation_id = ds.id
+WHERE sd.payment_type=$P{payment_type} AND s.id=$P{salaryId}
+ORDER BY s.salary_date ASC, e.empid ASC]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empid" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salary_accounts" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dps_accounts" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="salary_month" class="java.lang.String"/>
+	<field name="total_pf" class="java.lang.Double"/>
+	<field name="net_payable" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="designation" class="java.lang.String"/>
+	<variable name="sumAmount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pf}]]></variableExpression>
+	</variable>
+	<background>
+		<band height="822" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="573" height="820" uuid="eeb6dbbe-6746-496e-82cd-9df6632071cd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<frame>
+					<reportElement x="3" y="3" width="567" height="814" uuid="2764a0a0-f294-466c-9c7d-5cb51a7f755e"/>
+					<box>
+						<topPen lineWidth="2.0" lineColor="#000066"/>
+						<leftPen lineWidth="2.0" lineColor="#000066"/>
+						<bottomPen lineWidth="2.0" lineColor="#000066"/>
+						<rightPen lineWidth="2.0" lineColor="#000066"/>
+					</box>
+				</frame>
+			</frame>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="4" y="19" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="217" y="55" width="354" height="20" forecolor="#333333" uuid="d0b96631-fce6-40e4-80b5-d0438c652786"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{salaryName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="35" width="354" height="20" forecolor="#333333" uuid="ec72fb76-07f9-4bc8-9fd4-10150f8e8726"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Provident Fund Statement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="13" width="354" height="22" forecolor="#333333" uuid="8a8decf2-7704-4e38-8cf5-b9cddd1a49f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Baily School]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<frame>
+				<reportElement mode="Opaque" x="12" y="0" width="555" height="20" backcolor="#CCCCFF" uuid="ba4e2f7b-db62-49ab-b5e9-804eaa655ab9"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement x="40" y="0" width="52" height="20" uuid="377cac9a-5a3d-49a8-b8d8-9ff1919541fe"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EmployeeID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="0" width="108" height="20" uuid="af266e4c-c4e3-40e4-89ac-910e5c50d99c"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employee Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="0" width="57" height="20" uuid="321e6a19-9a7c-4941-a0a4-a63f3bf8ff25"/>
+				<box>
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DPS Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20" uuid="a3090e61-2f1f-450d-9b68-cb600ed2756d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="0" width="99" height="20" uuid="97826fb3-2d7b-4be5-bb88-79fea171516c"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dps Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="a3167d5d-660f-45f0-b9c3-11be027e19b5"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Designation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="99" height="20" uuid="d0464305-274f-4f16-8b18-18c09ce1dc35"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salary Account]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="52" height="17" uuid="937264ff-771a-4c14-895e-f3ee8d360b0b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="0" width="108" height="17" uuid="351f9732-6f31-442c-a8f7-812b8e8f87ee"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="0" width="99" height="17" uuid="cd444d2d-91e6-4194-a509-8db9ec3b5d4c"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dps_accounts}!=null?$F{dps_accounts}:" - "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="498" y="0" width="69" height="17" uuid="95c20063-091a-46b6-8e14-019e68b1b485"/>
+				<box rightPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_pf} != 0?$F{total_pf}:" - "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="17" uuid="92c89419-4fc6-459a-92a5-33ab7f562ac7"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="99" height="17" uuid="236227a9-7392-4033-89bf-0b5e40d2be59"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salary_accounts}!=null?$F{salary_accounts}:" - "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="0" width="28" height="17" uuid="49041d9b-611c-470f-8e60-b8318d4ac79d"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField pattern="#,##0">
+				<reportElement x="498" y="0" width="69" height="20" uuid="09335e07-257d-43e0-b586-94e72000d932"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="445" y="0" width="53" height="20" uuid="88d35086-68f7-401c-8d74-0e74408a4035"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement x="445" y="0" width="80" height="20" uuid="c691c439-138a-4a05-baf5-4d9fc254fe2d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="525" y="0" width="40" height="20" uuid="c6f15538-cf46-42d6-93ee-95f9925f1fce"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="0" width="140" height="20" uuid="4e908bf5-e668-441b-8dac-2cec05a9bae4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,752 @@
+@font-face {
+    font-family: my_kalpurush;
+    src: url(kalpurush.woff);
+}
+
+/* Layout CSS Start*/
+body {
+    margin: 0px;
+    background: url("../../nhs/new-layout/boxed-bg.jpg");
+    font-family: my_kalpurush;
+}
+
+.main {
+    width: 1100px;
+    margin: auto;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    background: #e3e3e3;
+}
+
+.head_section {
+    background: #608621;
+    border-bottom: 1px solid #8ac007;
+}
+
+.logo {
+    float: left;
+}
+
+.logo img {
+    height: 100px;
+    margin: 10px;
+}
+
+.title {
+    float: left;
+    margin-left: 10px;
+}
+
+.cb {
+    clear: both;
+}
+
+.main_title {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.sub_title {
+    color: #f39c12;
+    font-size: 25px;
+    margin-top: 16px;
+}
+.sub_sub_title {
+    color: #f39c12;
+    font-size: 20px;
+}
+
+.news_section {
+    background: #609513;
+    min-height: 40px;
+}
+
+.body_section {
+    min-height: 435px;
+}
+
+.feture_section {
+    background: #609513;
+    min-height: 40px;
+}
+
+.footer_section {
+    background: #608621;
+    border-top: 1px solid #8ac007;
+    min-height: 40px;
+    padding: 10px;
+}
+
+.footer_section a {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.body_left {
+    width: 240px;
+    float: left;
+    min-height: 10px;
+}
+
+.body_right {
+    width: 850px;
+    float: right;
+    min-height: 435px;
+    padding: 5px;
+}
+
+/* Layout CSS End*/
+
+/*Home Page CSS Start */
+.home {
+    background: #fff;
+    min-height: 400px;
+}
+
+.home .slide {
+    width: 550px;
+}
+
+.chairman_corner {
+    margin: 5px 0 0 5px;
+}
+
+/*Home Page CSS End */
+
+/* Product CSS Start */
+.product {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 5px;
+    bottom: 0px;
+}
+
+.product_title {
+    background: #609513;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 25px;
+    padding: 5px 0 5px 10px;
+    text-shadow: 1px 1px 0 #003d51;
+    text-transform: uppercase;
+}
+
+.product_body {
+    margin: 5px 0;
+}
+
+.product_marquee {
+    height: 100%;
+}
+
+.product_list {
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+}
+
+.product_list li {
+    border-bottom: 1px solid #dddddd;
+    padding: 3px 0 3px 10px;
+}
+
+.product_list li:last-child {
+    border: none;
+}
+
+.show_more {
+    text-align: right;
+}
+
+.home table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.home table td {
+    width: 33.33%;
+    vertical-align: top;
+}
+
+/* Product CSS Start */
+
+/*Service Menu CSS Start*/
+.service_menu {
+    margin: 5px 0px 5px 5px;
+}
+
+.info-box {
+    min-height: 40px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.info-box-small {
+    width: 114px;
+}
+
+.info-box-big {
+    width: 232px;
+}
+
+.info-box-icon {
+    height: 40px;
+    width: 40px;
+    line-height: 0px;
+}
+
+.service_menu img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+
+.info-box-content {
+    margin-left: 35px;
+    padding: 7px 7px 7px 10px;
+}
+
+/*Service Menu CSS End*/
+
+/*News Section CSS Start*/
+.news_section section {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 0;
+    padding: 10px;
+}
+
+.news_section marquee {
+    color: #222222;
+}
+
+.news_section a {
+    color: #fff;
+}
+
+/*News Section CSS End*/
+
+/*Menu Section CSS Start*/
+.menu_section {
+    border-bottom: 1px solid #c7c7c7;
+    box-shadow: 0 1px #fff;
+}
+
+.menu_section .menu {
+    padding: 0px 10px;
+    background: #fff;
+    font-size: 16px;
+}
+
+.menu_section .menu ul {
+    text-align: left;
+    display: inline;
+    margin: 0;
+    padding: 15px 4px 17px 0;
+    list-style: none;
+}
+
+.menu_section .menu li.active {
+    background-color: #8ac007;
+    margin-bottom: 8px;
+}
+
+.pageheader-default .semitransparentbg {
+    background: #8ac007 !important;
+    padding-bottom:35px;
+    padding-top:20px;
+}
+
+.menu_section .menu ul li {
+    display: inline-block;
+    margin-right: -4px;
+    position: relative;
+    background: #fff;
+    cursor: pointer;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.menu_section .menu ul li .menu_item {
+    padding: 15px 20px;
+}
+
+.menu_section .menu ul li a {
+    color: #555;
+}
+
+.menu_section .menu ul li:hover {
+    background: #8ac007;
+    color: #fff;
+}
+
+.menu_section .menu ul li:hover a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu_section .menu ul li ul {
+    padding: 0;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 250px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    display: none;
+    opacity: 0;
+    -webkit-transiton: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -ms-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -transition: opacity 0.2s;
+    z-index: 99;
+}
+
+.menu_section .menu ul li ul li {
+    background: #555;
+    display: block;
+    color: #fff;
+    border-bottom: 1px solid #444;
+}
+
+.menu_section .menu ul li ul li .menu_item {
+    padding: 10px 10px;
+    width: 100%;
+}
+
+.menu_section .menu ul li ul li:last-child {
+    border-bottom: none;
+}
+
+.menu_section .menu ul li:hover ul {
+    display: block;
+    opacity: 1;
+
+}
+
+.menu_section .menu ul li ul li:hover {
+    background: #8ac007;
+}
+
+.menu_section .menu ul li ul li ul {
+    left: 254px;
+    top: 0px;
+}
+
+.menu_section .menu ul li:hover ul li ul {
+    display: none;
+}
+
+.menu_section .menu ul li ul li:hover ul {
+    display: block;
+}
+
+.menu_section .menu ul li ul li:hover ul li ul {
+    display: none;
+}
+
+.menu_section .menu ul li ul li ul li:hover ul {
+    display: block;
+}
+
+/*Menu Section CSS Start*/
+
+.contacts {
+    color: #fff;
+}
+
+.contact_head {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.contacts_item {
+    font-size: 18px;
+}
+
+.feture_head {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.feture_body ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.feture_body ul li {
+    font-size: 18px;
+}
+
+.feture_body ul li a {
+    color: #222;
+}
+
+.feture_body {
+    color: #222;
+}
+
+.album_photo {
+    margin-bottom: 20px;
+}
+
+.album_photo_img {
+    border: 1px solid #ddd;
+    padding: 7px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.album_photo_img img {
+    width: 100%;
+}
+
+.album_photo_title {
+    padding: 7px;
+    background: #f7f7f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    color: #3c8dbc;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.input_label {
+    text-align: right;
+    font-weight: bold;
+    line-height: 35px;
+}
+
+.td_action {
+    text-align: center;
+    width: 10px;
+}
+
+.td_action img {
+    margin: 0px 5px;
+}
+
+table.table-bordered.dataTable {
+    border-collapse: collapse !important;
+}
+
+table.table-bordered.dataTable tr th {
+}
+
+.feture_section .content {
+    min-height: 10px;
+}
+
+.login_page {
+    width: 400px;
+    padding: 100px 0px;
+    margin: auto;
+}
+
+.alert-danger-boot {
+    background-color: #f2dede !important;
+    border-color: #ebccd1 !important;
+    color: #a94442 !important;
+}
+
+.admin_body {
+}
+
+.admin_body .body_right {
+    background: #e3e3e3;
+}
+
+.main-sidebar {
+    position: relative;
+    padding-top: 0px;
+}
+
+.category {
+    display: inline-block;
+    text-align: left;
+    position: absolute;
+    z-index: 10;
+}
+
+.category ul {
+    list-style: none;
+}
+
+.category ul li ul li ul {
+    display: none;
+}
+
+.category ul li ul li:hover ul {
+    display: block;
+}
+
+.category ul {
+    width: 220px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.category ul li {
+    text-align: center;
+    background: #608621;
+    color: #ffffff;
+    font-weight: bold;
+    height: 40px;
+    padding: 10px 0px;
+}
+
+.category ul li ul {
+    width: 200px;
+    margin: 10px 10px;
+    display: block;
+}
+
+.category ul li ul li {
+    text-align: left;
+    background: #609513;
+    padding-left: 10px;
+    border-bottom: 1px solid #608621;
+    border-top: 1px solid #8ac007;
+}
+
+.category ul li ul li ul {
+    display: none;
+    left: 180px;
+    top: -41px;
+    position: relative;
+}
+
+.category ul li ul li a {
+    color: #ffffff;
+}
+
+.category ul li ul li:hover {
+    background: #000000;
+}
+
+.category ul li ul li:hover a {
+    text-decoration: none;
+}
+
+.category ul li ul li:hover ul {
+    display: block;
+}
+
+.category ul li ul li ul li ul {
+    display: none !important;
+}
+
+.category ul li ul li ul li:hover ul {
+    display: block !important;
+}
+
+.category ul li ul li ul li:hover ul li ul {
+    display: none !important;
+}
+
+.category ul li ul li ul li:hover ul li:hover ul {
+    display: block !important;
+}
+
+.select_find, .input_find {
+    width: 100% !important;
+}
+
+div.pagination {
+    padding-top: 10px;
+    width: 100%;
+}
+
+div.pagination div.pagi_info {
+    float: right;
+    line-height: 30px;
+}
+
+div.pagination ul {
+    padding: 0px;
+    margin: 0px;
+    float: left;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+div.pagination ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 5px 10px;
+    border-right: 1px solid #CCCCCC;
+}
+
+div.pagination ul li:last-child {
+    border: none;
+}
+
+div.pagination ul li.active {
+    background: #e5e5e5;
+}
+
+div.pagination ul li.pagi_active {
+    cursor: pointer;
+}
+
+div.pagination ul li.pagi_active:hover {
+    background: #e5e5e5;
+}
+
+.personal table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.personal table th, .personal table td {
+    border: 1px solid #dddddd;
+    padding: 5px;
+}
+
+.personal table th {
+    text-align: left;
+    background: #eeeeee;
+}
+
+.personal img {
+    width: 90px;
+    height: 115px;
+}
+
+.button {
+    background: #608621;
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #8ac007;
+    min-width: 150px;
+    text-align: center;
+}
+
+.button_small {
+    min-width: 5px !important;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.result_div, .result_gpa {
+    display: none;
+}
+
+.photo_p {
+    width: 750px;
+    height: 350px;
+}
+
+div.data_view table {
+    width: 100%;
+}
+
+div.data_view table tr:nth-child(2) td {
+    text-align: center;
+}
+
+div.data_view table tr:nth-child(2) td input, div.data_view table tr:nth-child(2) td select {
+    width: 100%;
+    width: calc(100% - 10px);
+    margin: auto;
+}
+
+div.data_view table tr th {
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    padding: 6px;
+    background: #DDDDDD;
+    text-align: center;
+}
+
+div.data_view table tr th:first-child {
+    border-left: 1px solid #DDDDDD;
+}
+
+div.data_view table tr th:last-child {
+}
+
+div.data_view table tr td {
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    padding: 6px;
+    font-size: 13px;
+}
+
+div.data_view table tr td:first-child {
+    border-left: 1px solid #DDDDDD;
+}
+
+div.data_view table tr:nth-child(even) td {
+    background: #f5f5f5;
+}
+
+div.data_view table tr:nth-child(odd) td {
+    background: #ffffff;
+}
+
+div.data_view table tr:nth-child(2) td {
+    padding: 0px;
+}
+
+div.data_view table tr td:last-child {
+    text-align: center;
+}
+
+div.data_view table tr td:last-child img {
+    margin: 0px 2px;
+}
+
+.center_data tr:nth-child(3) td {
+    background: #608621 !important;
+    color: #fff;
+    font-weight: bold;
+}
+
+.loding {
+    text-align: center;
+}
+
+.carousel .item {
+    height: 300px;
+    overflow: hidden;
+    -webkit-background-size: cover !Important;
+    -moz-background-size: cover !Important;
+    -o-background-size: cover !Important;
+    background-size: cover !Important;
+}
+
+.smalltitle span {
+    background-color: transparent;
+}
+
+h1.small {
+    font-size: 20px;
+}
+.home table .voice {
+    width: 50%;
+}
+.top-scroll li {
+    display:inline-block;
+    padding-right: 30px;
+}

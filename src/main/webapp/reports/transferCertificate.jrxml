@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="transferCertificate" language="groovy" pageWidth="595" pageHeight="842" columnWidth="545" leftMargin="30" rightMargin="20" topMargin="20" bottomMargin="20" uuid="68681dbc-e93c-4e6b-8cc5-18efa5044d00">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="109"/>
+	<parameter name="companyLogo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="tcId" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT release_text
+FROM tc_and_drop_out
+where id=$P{tcId}]]>
+	</queryString>
+	<field name="release_text" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="140" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="49">
+			<staticText>
+				<reportElement x="0" y="0" width="545" height="30" uuid="8ad7b119-493e-47f9-856f-741dd73ef606"/>
+				<textElement textAlignment="Center">
+					<font size="20" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Transfer Certificate]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="191" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="32" y="0" width="495" height="160" uuid="bc4061f0-8234-4396-9fdb-99932e0e1e3f"/>
+				<box topPadding="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{release_text}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+</jasperReport>

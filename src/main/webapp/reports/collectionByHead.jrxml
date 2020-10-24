@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="collectionByHead" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="academicYear" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="sqlParam" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT clsName.name cName, section.name sectionName, fitem.code feeCode, fitem.name feeName,
+	fpay.item_detail_name,
+fpay.amount*fpay.quantity as itemAmonut,(fpay.amount-fpay.net_payment) *fpay.quantity as itmeDiscount,
+fpay.fee_items_id,fpay.invoice_id,
+	fpay.net_payment,fpay.quantity,
+    fpay.student_id,fpay.total_payment
+FROM fee_payments fpay
+inner join fee_items fitem on fpay.fee_items_id=fitem.id
+inner join student std on fpay.student_id=std.id
+inner join class_name clsName on std.class_name_id=clsName.id
+inner join section section on std.section_id=section.id
+where fpay.academic_year=$P{academicYear} and fpay.active_status='ACTIVE'  $P!{sqlParam}
+order by clsName.sort_position, section.id, fitem.code, fpay.item_detail_sort_position]]>
+	</queryString>
+	<field name="cName" class="java.lang.String"/>
+	<field name="sectionName" class="java.lang.String"/>
+	<field name="feeCode" class="java.lang.String"/>
+	<field name="feeName" class="java.lang.String"/>
+	<field name="item_detail_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="itemAmonut" class="java.lang.Double"/>
+	<field name="itmeDiscount" class="java.lang.Double"/>
+	<field name="fee_items_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="invoice_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="net_payment" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="student_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_payment" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="item_detail_name" class="java.lang.String" resetType="Group" resetGroup="feeDetail">
+		<variableExpression><![CDATA[$F{item_detail_name}?" - "+$F{item_detail_name}:'']]></variableExpression>
+	</variable>
+	<variable name="itemDtotalPayment" class="java.lang.Double" resetType="Group" resetGroup="feeDetail" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_payment}]]></variableExpression>
+	</variable>
+	<variable name="itemDtotalAmount" class="java.lang.Double" resetType="Group" resetGroup="feeDetail" calculation="Sum">
+		<variableExpression><![CDATA[$F{itemAmonut}]]></variableExpression>
+	</variable>
+	<variable name="itemDtotalDiscount" class="java.lang.Double" resetType="Group" resetGroup="feeDetail" calculation="Sum">
+		<variableExpression><![CDATA[$F{itmeDiscount}]]></variableExpression>
+	</variable>
+	<group name="className">
+		<groupExpression><![CDATA[$F{cName}]]></groupExpression>
+	</group>
+	<group name="sectionName">
+		<groupExpression><![CDATA[$F{sectionName}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="10" y="0" width="555" height="20" uuid="113ee12e-99b3-47c8-bbeb-b30c939218ab"/>
+					<box leftPadding="20">
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cName}+" - "+$F{sectionName}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="feeName">
+		<groupExpression><![CDATA[$F{feeName}]]></groupExpression>
+	</group>
+	<group name="feeDetail">
+		<groupExpression><![CDATA[$F{item_detail_name}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="10" y="0" width="270" height="20" uuid="080edc4a-48f3-49ae-aeba-aa0eb248b27e"/>
+					<box rightPadding="20">
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{feeName}+" "+$V{item_detail_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="470" y="0" width="95" height="20" uuid="7d26958d-0f49-4869-85d6-1deb85dc4ef5"/>
+					<box leftPadding="0" rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{itemDtotalPayment}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="375" y="0" width="95" height="20" uuid="76338cc7-e753-4ea1-9636-2f7ce85c6fb9"/>
+					<box leftPadding="0" rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{itemDtotalDiscount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="280" y="0" width="95" height="20" uuid="548380e3-819d-4993-a0e6-aa788d0d8eb6"/>
+					<box leftPadding="0" rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{itemDtotalAmount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="822" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="1" width="573" height="820" uuid="eeb6dbbe-6746-496e-82cd-9df6632071cd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<frame>
+					<reportElement x="3" y="3" width="567" height="814" uuid="2764a0a0-f294-466c-9c7d-5cb51a7f755e"/>
+					<box>
+						<topPen lineWidth="2.0" lineColor="#000066"/>
+						<leftPen lineWidth="2.0" lineColor="#000066"/>
+						<bottomPen lineWidth="2.0" lineColor="#000066"/>
+						<rightPen lineWidth="2.0" lineColor="#000066"/>
+					</box>
+				</frame>
+			</frame>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="10" y="10" width="200" height="50" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="418" y="40" width="147" height="20" uuid="04d6038e-33d4-424a-85c9-86af7eeb8704"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Year : "+$P{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="10" width="231" height="30" forecolor="#FF9966" uuid="5ade3aeb-d81f-4488-9fd9-388ab7c5c659"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Collection Summary]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="555" height="20" backcolor="#CCCCFF" uuid="ba4e2f7b-db62-49ab-b5e9-804eaa655ab9"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="111" height="20" uuid="377cac9a-5a3d-49a8-b8d8-9ff1919541fe"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Class & Section]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="111" y="0" width="159" height="20" uuid="af266e4c-c4e3-40e4-89ac-910e5c50d99c"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fee Item Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="460" y="0" width="95" height="20" uuid="321e6a19-9a7c-4941-a0a4-a63f3bf8ff25"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="270" y="0" width="95" height="20" uuid="97826fb3-2d7b-4be5-bb88-79fea171516c"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="365" y="0" width="95" height="20" uuid="fdb7c24b-f80e-494b-9c3d-6a20fdcd5792"/>
+					<box rightPadding="5">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Discount]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="30">
+			<textField>
+				<reportElement x="445" y="0" width="80" height="20" uuid="c691c439-138a-4a05-baf5-4d9fc254fe2d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="525" y="0" width="40" height="20" uuid="c6f15538-cf46-42d6-93ee-95f9925f1fce"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="0" width="140" height="20" uuid="4e908bf5-e668-441b-8dac-2cec05a9bae4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

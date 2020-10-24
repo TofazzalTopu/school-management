@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportCard_subreport1" language="groovy" pageWidth="135" pageHeight="105" whenNoDataType="BlankPage" columnWidth="135" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d075ce22-1603-437b-ab5c-c07817d757f8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="stdId" class="java.lang.Long"/>
+	<parameter name="extraSubId" class="java.lang.Long"/>
+	<parameter name="examId" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select sub.name, esch.full_mark as examMark, emark.full_mark obmark, emark.tabulation_mark from exam_mark emark
+inner join subject_name sub on emark.subject_id=sub.id
+inner join exam_schedule esch on emark.exam_schedule_id=esch.id
+ where emark.exam_id=$P{examId} and emark.subject_id=$P{extraSubId} and emark.student_id=$P{stdId};]]>
+	</queryString>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="examMark" class="java.lang.Double"/>
+	<field name="obmark" class="java.lang.Double"/>
+	<field name="tabulation_mark" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="105" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="50" width="90" height="20" uuid="dd0cdb7f-5794-4e76-8ad6-7ed56f16003f"/>
+				<box leftPadding="5">
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Obtained Marks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="90" height="20" uuid="512ecc03-75ca-4c67-903b-190949b4bb2d"/>
+				<box leftPadding="5">
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Full Marks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="90" height="35" uuid="74801a71-8636-4364-ac8a-3eeded1c3314"/>
+				<box leftPadding="5">
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[10 % Mark to be
+added with TOM]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="90" y="30" width="45" height="20" forecolor="#006666" uuid="4a288462-2669-4e14-be59-d57786fb7963"/>
+				<box rightPadding="10">
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{examMark}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="90" y="50" width="45" height="20" forecolor="#00CCFF" uuid="33faf0de-aad8-49ae-925a-18f32e611277"/>
+				<box rightPadding="10">
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineWidth="0.75" lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{obmark}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="90" y="70" width="45" height="35" forecolor="#990099" uuid="9eaacfdf-adfa-469b-9078-e500326148a6"/>
+				<box rightPadding="10">
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tabulation_mark}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="0" y="0" width="135" height="30" forecolor="#006666" backcolor="#CCCCCC" uuid="61f58903-9fcd-4b7e-87a9-4617410ed955"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

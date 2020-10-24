@@ -1,0 +1,381 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+#loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.fc-day:hover{
+    cursor:pointer;
+}
+
+.syllabus-event .fc-event-inner
+{
+    color: #FFFFFF !important;
+    padding: .2em .6em .3em;
+    font-size: 85%;
+    font-weight: 700;
+    /*line-height: 1;*/
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: .25em;
+}
+.other-event .fc-event-inner
+{
+    color: #FFFFFF !important;
+    padding: .2em .6em .3em;
+    font-size: 85%;
+    font-weight: 700;
+    /*line-height: 1;*/
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: .25em;
+}
+.syllabus-class {
+    background-color: #1fb5ad !important;
+    border-color: #1fb5ad !important;
+}
+.exam-background-color {
+    background-color: #59D0F4 !important;
+    border-color: #50D0F4 !important;
+}
+.holiday {
+    background-color: #ff0000 !important;
+    border-color: #F6572E !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+}
+.holiday:hover {
+    background-color: #d1282d !important;
+}
+.weekly-holiday {
+    background-color: #F56A51 !important;
+    border-color: #F56A51 !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #000000;
+    font-size: 10px;
+    font-weight: bold;
+}
+.annual-program {
+    background-color: #299917 !important;
+    border-color: #387917 !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #111111;
+    font-size: 10px;
+    font-weight: bold;
+}
+.annual-program:hover {
+    color:#ffffff;
+    background-color: #387917 !important;
+}
+.class-routine {
+    background-color: #8e9899 !important;
+    border-color: #8e9899 !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #111111;
+    font-size: 13px;
+    font-weight: bold;
+}
+.class-routine:hover {
+    color:#ffffff;
+    background-color: #387917 !important;
+}
+.exam-days {
+    background-color: #035591 !important;
+    border-color: #034591 !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+}
+.exam-days:hover {
+    background-color: #134591 !important;
+}
+.exam-days-background {
+    background-color: #094551 !important;
+    border-color: #034591 !important;
+}
+.syllabus-hw {
+    background-color: #344860 !important;
+    border-color: #344860 !important;
+}
+.syllabus-quiz {
+    background-color: #FCB322 !important;
+    border-color: #FCB322 !important;
+}
+.syllabus-exam {
+    background-color: #FF6C60 !important;
+    border-color: #FF6C60 !important;
+}
+.syllabus-personal {
+    /* background-color: #a1a1a1 !important;
+    border-color: #a1a1a1 !important; */
+}
+.syllabus-study {
+    background-color: #5cb85c !important;
+    border-color: #5cb85c !important;
+}
+.syllabus-personal {
+    background-color: #8175c7 !important;
+    border-color: #8175c7 !important;
+}
+.syllabus-task {
+    background-color: #FF6C60 !important;
+    border-color: #FF6C60 !important;
+}
+.syllabus-misc,.syllabus-misc_l {
+    background-color: #428bca !important;
+    border-color: #428bca !important;
+}
+input[type="text"], input[type="email"], input[type="text"], input[type="number"] {
+    color: #2e2e2e;
+}
+@media (max-width: 767px) {
+
+    .modal-content{
+        margin-top:20px;
+    }
+
+}
+@media (max-width: 590px) {
+    .fc-header-title h2 {
+        position: absolute;
+        left: 18px;
+        font-size: 24px !important;
+        margin-top: -29px;
+    }
+    #eventCalendar{
+        margin-top:25px;
+    }
+    table.fc-header td.fc-header-center{
+        width:3px !important;
+    }
+}
+@media (max-width: 480px) {
+    #dud{
+        height:850px !important;
+    }
+    .fc-view.fc-view-agendaWeek,.fc-view.fc-view-agendaDay{
+        min-height:850px;
+    }
+    table.fc-agenda-days{height:850px;}
+    .event-options{
+        margin-bottom:35px;
+    }
+
+}
+@media (max-width: 410px) {
+    .fc-button-today {
+        display:none;
+    }
+    td.fc-header-left{
+        width:38px;
+    }
+}
+@media (max-width: 992px) {
+    .showthis {
+        display:none;
+    }
+}
+@media (max-width: 992px) {
+
+    .hidden-phone {
+        display: none !important;
+    }
+    .showthis {
+        display:block !important;
+    }
+}
+@media (min-width: 767px){
+    .hidden-desktop {
+        display: none;
+    }
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    cursor: inherit;
+    background-color: inherit;
+    opacity: 1;
+}
+.fc-header-title h2{
+    font-size:26px;
+
+}
+.fc-view-month  .fc-event-time{
+    display:none;
+}
+/*.fc-event{
+    min-height:30px !important;
+}*/
+.syllabus-class .tip{
+    display:none;
+}
+.active.r1, .active.r2{
+    background-color: #b0b5b9;
+    border-color: #b0b5b9;
+    color: #fff;
+}
+.daypick.active{
+    background-color: #1fb5ad;
+    border-color: #1fb5ad;
+    color: #FFFFFF;
+}
+.legend:hover{
+    cursor:pointer;
+}
+button.legend:active{
+    background:white !important;
+    color:black;
+    border:1px solid black;
+}
+.col-md-6, header.col-md-12{
+    padding-right:0;
+}
+.label-primary{
+    background-color: #1fb5ad !important;
+    border-color: #1fb5ad !important;
+    color:white;
+}
+.inactive {
+    background:white !important;
+    border:1px solid #2e2e2e !important;
+    color:#2e2e2e !important;
+}
+@media (max-width: 600px) {
+
+    .event-options{
+        margin-bottom:35px;
+    }
+}
+.label-primary{
+    background-color: #1fb5ad;
+    border-color: #1fb5ad;
+    color:white;
+}
+@media (min-width: 601px) {
+    .event-options{
+        margin-bottom:15px;
+    }
+}
+.bootstrap-timepicker-widget{
+    z-index:1050;
+}
+.datepicker.dropdown-menu {
+    z-index:1050 !important;
+}
+table.fc-header{
+    width:100% !important;
+}
+table.fc-header td.fc-header-center{
+    width:160px;
+}
+
+@media (max-width: 840px) and (min-width: 767px) {
+    table.fc-header h2{
+        position: absolute;
+        left: 18px;
+        font-size: 24px !important;
+        margin-top: -29px;
+    }
+    #eventCalendar{
+        margin-top:35px;
+    }
+    table.fc-header td.fc-header-center{
+        width:93px !important;
+    }
+}
+@media (max-width: 768px) {
+    #taskbar {
+        display: block;
+    }
+}
+.class-list{
+    background:white;
+    border: 1px solid rgba(150, 160, 180, 0.3);
+    color:#000000 !important;
+    text-transform: none;
+    font-size:75% !important;
+    width: 108px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.class-list .class{
+    width: 108px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.inactive {
+    background:white !important;
+    border:1px solid #2e2e2e !important;
+    color:#2e2e2e !important;
+
+}
+@media (max-width: 600px) {
+
+    .event-options{
+        margin-bottom:35px;
+    }
+
+}
+.label-primary{
+    background-color: #1fb5ad;
+    border-color: #1fb5ad;
+    color:white;
+}
+@media (min-width: 601px) {
+    .event-options{
+        margin-bottom:15px;
+    }
+}
+.bootstrap-timepicker-widget{
+    z-index:1050;
+}
+.datepicker.dropdown-menu {
+    z-index:1050 !important;
+}
+.fc-widget-header, .fc-widget-content{
+    border:0;
+    border-top: 1px solid #ddd;
+}
+.fc-border-separate th, .fc-border-separate td{
+    border-left:0;
+}
+.fc-button {
+    background: none;
+    border: 0;
+}
+.fc-state-active{
+    background-color: #fafafa;
+}
+@media (max-width:767px){
+
+    .my-event-preference{
+        border-radius: 50%;
+    }
+}
+.fc-today .fc-day-number{
+    color: #FF6C60;
+    border-radius: 50%;
+    font-weight:bold;
+    font-size: 50px;
+
+}
+.fc-title {
+    vertical-align: middle;
+}

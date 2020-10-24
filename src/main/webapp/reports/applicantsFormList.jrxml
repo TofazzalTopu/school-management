@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="regFormList" language="groovy" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="35cbf4e7-9ad0-4f5a-abb9-57e05559479f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="sqlParam" class="java.lang.String"/>
+	<parameter name="className" class="java.lang.String"/>
+	<parameter name="applicantStatusTitle" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT f.name AS std_name, f.birth_date AS std_birth_date ,f.blood_group AS std_blood_group, f.email AS std_email, f.gender AS std_gender, f.has_bro_sis AS std_has_bro_sis,
+f.mobile AS std_mobile, f.nationality AS std_nationality,f.phone AS std_phone,f.religion AS std_religion, f.form_id AS std_form_id,c.name AS class_name,
+pa.area AS pa_area,pa.house_number AS pa_house_number,pa.road_number AS pa_road_number,pa.post_office AS pa_post_office, pa.upazilas AS pa_upazilas,pa.district AS pa_district,
+pma.area AS pma_area,pma.house_number AS pma_house_number,pma.road_number AS pma_road_number,pma.post_office AS pma_post_office, pma.upazilas AS pma_upazilas,pma.district AS pma_district,
+fa.name AS fa_name, fa.profession AS fa_profession, fa.avg_income AS fa_avg_income,
+mo.name AS mo_name, mo.profession AS mo_profession, mo.avg_income AS mo_avg_income,
+lg.name AS lg_name, lg.profession AS lg_profession, lg.avg_income AS lg_avg_income,
+ps.name AS ps_name, ps.phone AS ps_phone, ps.tc AS ps_tc
+FROM reg_admission_form f
+LEFT JOIN class_name c ON c.id =f.class_name_id
+LEFT JOIN com_address_info pa ON pa.id =f.present_address_id
+LEFT JOIN com_address_info pma ON pma.id =f.permanent_address_id
+LEFT JOIN reg_parents_info fa ON fa.id =f.father_info_id
+LEFT JOIN reg_parents_info mo ON mo.id =f.mother_info_id
+LEFT JOIN reg_parents_info lg ON lg.id =f.legal_guardian_id
+LEFT JOIN reg_pre_school ps ON ps.id =f.pre_school_id
+$P!{sqlParam}
+ORDER BY f.form_id ASC]]>
+	</queryString>
+	<field name="std_name" class="java.lang.String"/>
+	<field name="std_birth_date" class="java.sql.Timestamp"/>
+	<field name="std_blood_group" class="java.lang.String"/>
+	<field name="std_email" class="java.lang.String"/>
+	<field name="std_gender" class="java.lang.String"/>
+	<field name="std_has_bro_sis" class="java.lang.Boolean"/>
+	<field name="std_mobile" class="java.lang.String"/>
+	<field name="std_nationality" class="java.lang.String"/>
+	<field name="std_phone" class="java.lang.String"/>
+	<field name="std_religion" class="java.lang.String"/>
+	<field name="std_form_id" class="java.lang.String"/>
+	<field name="class_name" class="java.lang.String"/>
+	<field name="pa_area" class="java.lang.String"/>
+	<field name="pa_house_number" class="java.lang.String"/>
+	<field name="pa_road_number" class="java.lang.String"/>
+	<field name="pa_post_office" class="java.lang.String"/>
+	<field name="pa_upazilas" class="java.lang.String"/>
+	<field name="pa_district" class="java.lang.String"/>
+	<field name="pma_area" class="java.lang.String"/>
+	<field name="pma_house_number" class="java.lang.String"/>
+	<field name="pma_road_number" class="java.lang.String"/>
+	<field name="pma_post_office" class="java.lang.String"/>
+	<field name="pma_upazilas" class="java.lang.String"/>
+	<field name="pma_district" class="java.lang.String"/>
+	<field name="fa_name" class="java.lang.String"/>
+	<field name="fa_profession" class="java.lang.String"/>
+	<field name="fa_avg_income" class="java.lang.Double"/>
+	<field name="mo_name" class="java.lang.String"/>
+	<field name="mo_profession" class="java.lang.String"/>
+	<field name="mo_avg_income" class="java.lang.Double"/>
+	<field name="lg_name" class="java.lang.String"/>
+	<field name="lg_profession" class="java.lang.String"/>
+	<field name="lg_avg_income" class="java.lang.Double"/>
+	<field name="ps_name" class="java.lang.String"/>
+	<field name="ps_phone" class="java.lang.String"/>
+	<field name="ps_tc" class="java.lang.String"/>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="13" width="250" height="25" forecolor="#FF9966" uuid="5287ccb0-ca1d-4384-8270-2853382b1ad6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Applicants List]]></text>
+			</staticText>
+			<image onErrorType="Icon">
+				<reportElement x="58" y="13" width="88" height="62" uuid="4bee924e-226f-4636-bdfd-e408f9d7368c"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="280" y="38" width="55" height="16" forecolor="#000000" uuid="e996344d-fdb9-4e0e-aeea-d3fba4ec0cdc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Class :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="38" width="195" height="16" uuid="36a67ce8-0074-4249-ab56-9cdb29f91ee6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{className}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="54" width="55" height="16" forecolor="#000000" uuid="a09895b5-912a-4688-8e15-cf7b93182f39"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Status :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="335" y="54" width="195" height="16" uuid="20ef7f3f-8dbf-4af7-b666-4a6d8234b9ad"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{applicantStatusTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="0" width="555" height="20" backcolor="#CCCCFF" uuid="a7184588-1ad1-4443-8e93-3cec7de4dad3"/>
+				<box leftPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="85" y="0" width="120" height="20" uuid="ff48c1b7-5764-4356-a35d-3969a1a37932"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Student Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="205" y="0" width="110" height="20" uuid="82559a23-eb56-4e03-a48b-a9527c150772"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fathers Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="492" y="0" width="63" height="20" uuid="38ba5785-5c09-497d-95da-b052a9eec779"/>
+					<box>
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Class]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="20" uuid="b9e91a11-7bff-4d4e-a472-7e95937b20a8"/>
+					<box leftPadding="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="0" width="55" height="20" uuid="f300ef34-78f6-4d73-b6b7-040bb07ba977"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Form Id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="0" width="101" height="20" uuid="f5a52a66-c046-401d-ad7c-87a6612a543d"/>
+					<box leftPadding="4">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mothers Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="415" y="0" width="77" height="20" uuid="6fe641ad-2727-4762-a450-83b2606352a4"/>
+					<box leftPadding="0">
+						<leftPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mobile Number]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="55" height="16" uuid="069f00c4-7035-489f-a165-be3663394f97"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{std_form_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="0" width="110" height="16" uuid="b38f3cc9-47b9-4271-8862-59af7ec7d9f1"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fa_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="120" height="16" uuid="092abad2-d915-42bf-872d-8d54c997dc6a"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{std_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="0" width="62" height="16" uuid="442ecc7d-0696-440f-af13-351028372d23"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{class_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="30" height="16" uuid="9f36324a-b189-4049-a5c8-d8f88f470df6"/>
+				<box leftPadding="0" rightPadding="3">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="325" y="0" width="100" height="16" uuid="dfa9332a-dd23-4252-92a2-47bdffee52cb"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mo_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="426" y="0" width="76" height="16" uuid="857a7fc8-1cb1-4b9c-981c-31a09fb87c54"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{std_mobile}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

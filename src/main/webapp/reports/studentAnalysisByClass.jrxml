@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="studentAnalysisByClass" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="62540371-7f8d-43f3-873f-53b4fe48ced8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="className" class="java.lang.String"/>
+	<parameter name="groupName" class="java.lang.String"/>
+	<parameter name="academicYear" class="java.lang.String"/>
+	<parameter name="shiftName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="className" class="java.lang.String"/>
+	<field name="sectionName" class="java.lang.String"/>
+	<field name="sortOrder" class="java.lang.Integer"/>
+	<field name="maleStudentCount" class="java.lang.Integer"/>
+	<field name="femaleStudentCount" class="java.lang.Integer"/>
+	<field name="muslimCount" class="java.lang.Integer"/>
+	<field name="hinduCount" class="java.lang.Integer"/>
+	<field name="christanCount" class="java.lang.Integer"/>
+	<field name="buddhistCount" class="java.lang.Integer"/>
+	<field name="admissionCount" class="java.lang.Integer"/>
+	<field name="promotionCount" class="java.lang.Integer"/>
+	<variable name="totalMale" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{maleStudentCount}]]></variableExpression>
+	</variable>
+	<variable name="totalFemale" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{femaleStudentCount}]]></variableExpression>
+	</variable>
+	<variable name="totalMuslim" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{muslimCount}]]></variableExpression>
+	</variable>
+	<variable name="totalHindu" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{hinduCount}]]></variableExpression>
+	</variable>
+	<variable name="totalBuddhist" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{buddhistCount}]]></variableExpression>
+	</variable>
+	<variable name="totalChristan" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{christanCount}]]></variableExpression>
+	</variable>
+	<variable name="totalAdmission" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{admissionCount}]]></variableExpression>
+	</variable>
+	<variable name="totalPromotion" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{promotionCount}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="82" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="0" y="0" width="160" height="40" uuid="4fd55d6d-777a-4fa7-9704-450129ba28a9"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="0" width="355" height="30" forecolor="#006600" uuid="9e7939e2-71d5-407d-bbd0-a35bc335d1b6"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STUDENT ANALYSIS]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="40" width="555" height="40" uuid="607be3e7-23c2-4acf-a133-9fbf433ee030"/>
+				<textField>
+					<reportElement x="0" y="20" width="250" height="20" uuid="f28d1550-5c8e-4b86-ae22-2b8acf699ce2"/>
+					<textFieldExpression><![CDATA[$P{shiftName}?"Shift: "+$P{shiftName}:"Shift: All"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="0" width="250" height="20" uuid="cb9c05ac-b1d7-4396-b524-eaf2c57cceca"/>
+					<textFieldExpression><![CDATA["Year: "+$P{academicYear}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="305" y="0" width="250" height="20" uuid="33c8bb0f-1148-47f2-8617-4e42b5cfc020"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{groupName}?"Group: "+$P{groupName}:"Group: General"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="305" y="20" width="250" height="20" uuid="c3295816-de0c-493a-a31e-cdec9f71474a"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{className}?"Class: "+$P{className}:"Class: All"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="190" y="0" width="50" height="20" uuid="d9ba3635-3a58-4409-9a9a-715775b9c309"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Male]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="55" height="20" uuid="4ad0c7a6-37d4-4924-8b76-6313dc30db86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Female]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="0" width="50" height="20" uuid="d3ecaff3-dfe1-4df2-b975-5e63f03f85f1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Muslim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="0" width="50" height="20" uuid="c62e9b95-d9a9-424a-a46f-1dddcbe375c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Hindu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="0" width="55" height="20" uuid="988ab605-3887-444a-8989-f1e1aec7b92c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Christian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="55" height="20" uuid="03e29f6d-3bbe-416e-892e-86f779796abe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Buddhist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="0" width="50" height="20" uuid="48b79fe6-7e96-4da0-9666-5981844d50fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20" uuid="05994f6c-d20f-4e19-b311-5f41f0ec5453"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Class Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="55" height="20" uuid="eff9e7d1-72b7-4f3f-9b3f-79db7d31511a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# Promotion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="55" height="20" uuid="53031d81-238b-48a3-9e56-72e72dfda998"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[# adminssion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15">
+			<textField>
+				<reportElement x="190" y="0" width="50" height="15" uuid="6f7fce96-9140-48fa-a899-43879c19dffa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maleStudentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="55" height="15" uuid="4c7162c4-236b-48a1-bbdc-5269043728b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{femaleStudentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="0" width="50" height="15" uuid="44ad69e8-e717-4976-9d66-95a88671ad77"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{muslimCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="50" height="15" uuid="bba2bb2e-20cb-4f0c-b478-8b2e040063bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{hinduCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="55" height="15" uuid="3e53a9f6-678b-4da4-925a-a6d06158a80f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{christanCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="55" height="15" uuid="6a576c72-e69f-418a-ba9e-af34ed882f14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{buddhistCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="50" height="15" uuid="574d8d44-eca1-4a3e-853a-99e557d1fc42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maleStudentCount}+$F{femaleStudentCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="80" height="15" uuid="8c30f072-da0a-4ad3-bcc9-89c5d506ac24"/>
+				<box leftPadding="0"/>
+				<textElement verticalAlignment="Middle" markup="none"/>
+				<textFieldExpression><![CDATA[$F{className}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="55" height="15" uuid="197ea9cd-582f-46f8-bd8a-0de32c79a3db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{promotionCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="55" height="15" uuid="716cf1f9-fd2e-4718-bad3-0e94d360f219"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{admissionCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="190" y="0" width="50" height="20" uuid="9dd9eb14-8c5c-4b23-af0d-3693fc0e054d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalMale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="55" height="20" uuid="2bafe370-e4ff-47fe-9789-ae4cfed165a0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalFemale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="0" width="50" height="20" uuid="18f0a45b-131e-47ad-82d8-69190f6ae063"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalMuslim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="50" height="20" uuid="ee939aac-7b8e-453a-89ee-439e138e898b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalHindu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="55" height="20" uuid="697fd5e8-eb46-4b0e-929a-60b15cc523d5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalChristan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="55" height="20" uuid="19bdbabb-2c13-48e7-884f-586a19740ae3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalBuddhist}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="50" height="20" uuid="ec9c215a-ca61-452d-b79f-b9b2dc86a680"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalMale}+$V{totalFemale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="55" height="20" uuid="3344bd7b-775b-4f91-86f7-ab140d77714a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalPromotion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="55" height="20" uuid="4a1097f2-cad4-47dd-b317-79676c2261eb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{totalAdmission}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="studentAttnRecord" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="fd2ffd4a-294c-44a5-8a41-0a2acf5468c2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="REPORT_LOGO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\grails\\grails-projects\\baily-app\\web-app\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="className" class="java.lang.String"/>
+	<parameter name="sectionName" class="java.lang.String"/>
+	<parameter name="studentId" class="java.lang.String"/>
+	<parameter name="rollNo" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="reportDate" class="java.lang.String"/>
+	<parameter name="studentName" class="java.lang.String"/>
+	<parameter name="schoolAddress" class="java.lang.String"/>
+	<parameter name="creditLine" class="java.lang.String"/>
+	<parameter name="schoolName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="reportDate" class="java.util.Date"/>
+	<field name="dayType" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="pStatus" class="java.lang.String"/>
+	<field name="inTime" class="java.sql.Timestamp"/>
+	<field name="outTime" class="java.lang.String"/>
+	<variable name="workingDay" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{dayType} == "Open"? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="pCount" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pStatus} == "Present"? 1 : 0]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<image onErrorType="Icon">
+				<reportElement x="10" y="4" width="167" height="40" uuid="03f4f376-030e-4f8f-98e6-415ef04307ba"/>
+				<imageExpression><![CDATA[$P{REPORT_LOGO}+"report-logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="10" y="50" width="365" height="20" uuid="baad0f71-37d2-4a0b-8872-46f61f61d3db"/>
+				<textFieldExpression><![CDATA["Student ID : "+$P{studentId}+", Name : "+$P{studentName}+", Roll  : "+$P{rollNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="4" width="201" height="20" uuid="4cec29fa-56cd-4b7d-9b40-eef4caaf9936"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Date: "+ $P{reportDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="50" width="189" height="20" uuid="7501b6e8-5578-4ae9-8b82-c048d3ad3503"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Class  : "+$P{className}+", Section : "+$P{sectionName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="4" width="184" height="20" uuid="dd6c7177-1f77-4980-a618-2003e9fca205"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="24" width="184" height="20" uuid="aa9bdd50-9674-402a-9dcc-ddf4f571ec2f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{schoolAddress}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="104" height="20" uuid="d1e47e28-67f5-4b60-b2a6-a6ca1cba8d00"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="0" width="160" height="20" uuid="f24ff30a-daac-4c7e-84e6-fc06ceb31ffb"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[In Time ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="0" width="152" height="20" uuid="be4bd6df-b976-401d-8ba2-c4a7e393e8fc"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="0" width="136" height="20" uuid="ad293bec-a859-4c72-b3ee-0cec6df9cf73"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Out Time ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="10" y="0" width="104" height="20" uuid="aaf0effa-3b2a-4fce-ac88-5ad84e55278b"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reportDate}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="114" y="0" width="448" height="20" uuid="34ba5f7e-a7dc-4cbe-8ad1-885096b7797e">
+					<printWhenExpression><![CDATA[$F{dayType} == "Open"]]></printWhenExpression>
+				</reportElement>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="152" height="20" uuid="5bd97a67-d1e7-4b9e-9f37-9162e17774d7"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{pStatus}]]></textFieldExpression>
+				</textField>
+				<textField pattern="K:mm a" isBlankWhenNull="true">
+					<reportElement x="312" y="0" width="136" height="20" uuid="e4772a18-ea8f-412b-9a17-366c3e17fa01"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{outTime}]]></textFieldExpression>
+				</textField>
+				<textField pattern="h:mm a" isBlankWhenNull="true">
+					<reportElement x="152" y="0" width="160" height="20" uuid="f2c44d5d-3ce0-4d7f-87e5-ccc4f709b7a7"/>
+					<box>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{inTime}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="0" width="448" height="20" uuid="359f381b-6c96-4e3d-b1e0-1a331a5a63d0">
+					<printWhenExpression><![CDATA[$F{dayType} != "Open"]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="442" y="0" width="80" height="20" uuid="ad1217f8-9188-4aec-84c6-e6e5b48d3875"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="10" y="0" width="140" height="20" uuid="b6ef6990-89dd-4cbe-b001-4d072721aad5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="522" y="0" width="40" height="20" uuid="b5dfcc43-c73a-45e0-bbd8-4e1760415069"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="292" height="20" uuid="ee4765d4-9524-45a7-8055-5aedb2c551ba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{creditLine}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<textField evaluationTime="Report">
+				<reportElement x="125" y="20" width="100" height="20" uuid="56e79f80-04eb-47ee-8ed9-c407c442f9d9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Total Working Day: "+$V{workingDay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="0" width="211" height="20" uuid="5bae7853-602b-439f-85d4-284c39d7c9bc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Attendance Summary:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="266" y="20" width="95" height="20" uuid="f2227668-5c92-4a2c-9393-5e872fdfdaac"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Present: " +$V{pCount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement x="390" y="20" width="172" height="20" uuid="3ac598b6-c227-4c74-8719-550cc5fd9821"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Absent: "+($V{workingDay} - $V{pCount})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
